@@ -11,9 +11,9 @@
 
 @interface SettingModel : NSObject
 @property (nonatomic, assign) MPMovieVideoDecoderMode videoDecoderMode;
-@property (nonatomic, assign) float bufferTime;
-@property (nonatomic, assign) float bufferSize;
-@property (nonatomic, assign) float timeOutPrepare;
-@property (nonatomic, assign) float timeOutRead;
+@property (nonatomic, assign) float bufferTimeMax;
+@property (nonatomic, assign) float bufferSizeMax;
+@property (nonatomic, assign) float preparetimeOut;
+@property (nonatomic, assign) float readtimeOut;
 @property (nonatomic, assign) BOOL  isLoopPlay;
 @end

@@ -8,9 +8,12 @@
 
 #import "VodViewController.h"
 #import "SettingViewController.h"
+#import "VideoListViewModel.h"
+#import "PlayerViewController.h"
 
 @interface VodViewController ()
-
+@property (nonatomic, strong) VideoListViewModel *videoListViewModel;
+@property (nonatomic, strong) UICollectionView   *videoCollectionView;
 @end
 
 @implementation VodViewController
