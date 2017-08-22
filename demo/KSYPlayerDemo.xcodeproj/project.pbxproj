@@ -47,9 +47,11 @@
 		F07DE4141F4C20D400370C54 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4081F4C20D400370C54 /* BaseViewController.m */; };
 		F07DE4151F4C20D400370C54 /* ChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE40B1F4C20D400370C54 /* ChoiceViewController.m */; };
 		F07DE4161F4C20D400370C54 /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE40D1F4C20D400370C54 /* LiveViewController.m */; };
-		F07DE4171F4C20D400370C54 /* VersionSwitchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE40F1F4C20D400370C54 /* VersionSwitchHandler.m */; };
 		F07DE4181F4C20D400370C54 /* VodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4111F4C20D400370C54 /* VodViewController.m */; };
 		F07DE41A1F4C21D000370C54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F07DE4191F4C21D000370C54 /* Main.storyboard */; };
+		F07DE41F1F4C236200370C54 /* VersionSwitchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE41E1F4C236200370C54 /* VersionSwitchHandler.m */; };
+		F07DE4261F4C2B9C00370C54 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4251F4C2B9C00370C54 /* SettingViewController.m */; };
+		F07DE42A1F4C34C600370C54 /* SettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4291F4C34C600370C54 /* SettingModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -138,11 +140,15 @@
 		F07DE40B1F4C20D400370C54 /* ChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceViewController.m; sourceTree = "<group>"; };
 		F07DE40C1F4C20D400370C54 /* LiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveViewController.h; sourceTree = "<group>"; };
 		F07DE40D1F4C20D400370C54 /* LiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveViewController.m; sourceTree = "<group>"; };
-		F07DE40E1F4C20D400370C54 /* VersionSwitchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionSwitchHandler.h; sourceTree = "<group>"; };
-		F07DE40F1F4C20D400370C54 /* VersionSwitchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionSwitchHandler.m; sourceTree = "<group>"; };
 		F07DE4101F4C20D400370C54 /* VodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VodViewController.h; sourceTree = "<group>"; };
 		F07DE4111F4C20D400370C54 /* VodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VodViewController.m; sourceTree = "<group>"; };
 		F07DE4191F4C21D000370C54 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F07DE41D1F4C236200370C54 /* VersionSwitchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionSwitchHandler.h; sourceTree = "<group>"; };
+		F07DE41E1F4C236200370C54 /* VersionSwitchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionSwitchHandler.m; sourceTree = "<group>"; };
+		F07DE4241F4C2B9C00370C54 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		F07DE4251F4C2B9C00370C54 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		F07DE4281F4C34C600370C54 /* SettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModel.h; sourceTree = "<group>"; };
+		F07DE4291F4C34C600370C54 /* SettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +301,8 @@
 		F07DE4031F4C20D400370C54 /* KSYPlayerDemoRefactor */ = {
 			isa = PBXGroup;
 			children = (
+				F07DE4271F4C34B700370C54 /* model */,
+				F07DE41C1F4C236200370C54 /* Handler */,
 				F07DE4041F4C20D400370C54 /* Base */,
 				F07DE4091F4C20D400370C54 /* Controller */,
 				F07DE4121F4C20D400370C54 /* View */,
@@ -320,10 +328,10 @@
 				F07DE40B1F4C20D400370C54 /* ChoiceViewController.m */,
 				F07DE40C1F4C20D400370C54 /* LiveViewController.h */,
 				F07DE40D1F4C20D400370C54 /* LiveViewController.m */,
-				F07DE40E1F4C20D400370C54 /* VersionSwitchHandler.h */,
-				F07DE40F1F4C20D400370C54 /* VersionSwitchHandler.m */,
 				F07DE4101F4C20D400370C54 /* VodViewController.h */,
 				F07DE4111F4C20D400370C54 /* VodViewController.m */,
+				F07DE4241F4C2B9C00370C54 /* SettingViewController.h */,
+				F07DE4251F4C2B9C00370C54 /* SettingViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -333,6 +341,24 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F07DE41C1F4C236200370C54 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				F07DE41D1F4C236200370C54 /* VersionSwitchHandler.h */,
+				F07DE41E1F4C236200370C54 /* VersionSwitchHandler.m */,
+			);
+			path = Handler;
+			sourceTree = "<group>";
+		};
+		F07DE4271F4C34B700370C54 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F07DE4281F4C34C600370C54 /* SettingModel.h */,
+				F07DE4291F4C34C600370C54 /* SettingModel.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -410,11 +436,13 @@
 			files = (
 				F07DE4161F4C20D400370C54 /* LiveViewController.m in Sources */,
 				F07DE4151F4C20D400370C54 /* ChoiceViewController.m in Sources */,
+				F07DE42A1F4C34C600370C54 /* SettingModel.m in Sources */,
 				582CC6051F3072A200DFED24 /* KSYPlayerSubtitleView.m in Sources */,
 				582CC6041F30729E00DFED24 /* KSYPlayerPicView.m in Sources */,
 				582CC6031F30729900DFED24 /* KSYPlayerOtherView.m in Sources */,
 				582CC6021F30729300DFED24 /* KSYPlayerAudioView.m in Sources */,
 				587CEF481EFBA7BC0018F226 /* KSYSimplePlayVC.m in Sources */,
+				F07DE41F1F4C236200370C54 /* VersionSwitchHandler.m in Sources */,
 				F07DE4141F4C20D400370C54 /* BaseViewController.m in Sources */,
 				588141F11ECB0F2F0022A360 /* KSYProgressView.m in Sources */,
 				588141EE1ECB0F2F0022A360 /* KSYPlayerCfgVC.m in Sources */,
@@ -424,10 +452,10 @@
 				588141F21ECB0F2F0022A360 /* KSYURLTableVC.m in Sources */,
 				95B4A4131CC085BE00CB6804 /* KSYSQLite.m in Sources */,
 				74B9ED601C158675003149E9 /* AppDelegate.m in Sources */,
-				F07DE4171F4C20D400370C54 /* VersionSwitchHandler.m in Sources */,
 				E328B4D81CCE087400BD31FC /* KSYDBCreater.m in Sources */,
 				582096031EDED32600C38D0F /* KSYAVWriter.m in Sources */,
 				588141FD1ECB0F690022A360 /* KSYNameSlider.m in Sources */,
+				F07DE4261F4C2B9C00370C54 /* SettingViewController.m in Sources */,
 				588141FF1ECB0F690022A360 /* KSYUIView.m in Sources */,
 				588141FC1ECB0F690022A360 /* KSYFileSelector.m in Sources */,
 				F07DE4181F4C20D400370C54 /* VodViewController.m in Sources */,

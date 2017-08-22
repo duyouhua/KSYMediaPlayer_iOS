@@ -8,30 +8,46 @@
 
 #import "BaseNavigationController.h"
 
-@interface BaseNavigationController ()
-
+@interface BaseNavigationController ()<UINavigationControllerDelegate>
+@property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @end
 
 @implementation BaseNavigationController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self swipToPopback];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)swipToPopback {
+    id target = self.interactivePopGestureRecognizer.delegate;
+    self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+    self.panGesture.delegate = (id<UIGestureRecognizerDelegate>)self;
+    [self.view addGestureRecognizer:self.panGesture];
+    self.interactivePopGestureRecognizer.enabled = NO;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)handleNavigationTransition:(UIPanGestureRecognizer *)sender {
+    [self popViewControllerAnimated:YES];
 }
-*/
+
+- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
+    
+    CGPoint translation = [gestureRecognizer translationInView:gestureRecognizer.view.superview];
+    
+    if (translation.x < 0) {
+        return NO;
+    }
+    
+    BOOL isPanUnEnabled = NO;
+    
+    if (isPanUnEnabled) {
+        return NO;
+    }
+    
+    return fabs(translation.x) > fabs(translation.y);
+}
+
 
 @end
