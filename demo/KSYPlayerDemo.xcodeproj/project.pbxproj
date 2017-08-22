@@ -29,7 +29,6 @@
 		588141FF1ECB0F690022A360 /* KSYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 588141FB1ECB0F690022A360 /* KSYUIView.m */; };
 		74B9ED5D1C158675003149E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B9ED5C1C158675003149E9 /* main.m */; };
 		74B9ED601C158675003149E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B9ED5F1C158675003149E9 /* AppDelegate.m */; };
-		74B9ED661C158675003149E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74B9ED641C158675003149E9 /* Main.storyboard */; };
 		74B9ED681C158675003149E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74B9ED671C158675003149E9 /* Assets.xcassets */; };
 		74B9ED6B1C158675003149E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74B9ED691C158675003149E9 /* LaunchScreen.storyboard */; };
 		74B9EE291C159629003149E9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 74B9EE281C159629003149E9 /* libz.tbd */; };
@@ -44,6 +43,13 @@
 		95B4A4141CC085BE00CB6804 /* KSYSQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B4A40F1CC085BE00CB6804 /* KSYSQLiteManager.m */; };
 		95B4A4151CC085BE00CB6804 /* QRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B4A4111CC085BE00CB6804 /* QRViewController.m */; };
 		E328B4D81CCE087400BD31FC /* KSYDBCreater.m in Sources */ = {isa = PBXBuildFile; fileRef = E328B4D71CCE087400BD31FC /* KSYDBCreater.m */; };
+		F07DE4131F4C20D400370C54 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4061F4C20D400370C54 /* BaseNavigationController.m */; };
+		F07DE4141F4C20D400370C54 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4081F4C20D400370C54 /* BaseViewController.m */; };
+		F07DE4151F4C20D400370C54 /* ChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE40B1F4C20D400370C54 /* ChoiceViewController.m */; };
+		F07DE4161F4C20D400370C54 /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE40D1F4C20D400370C54 /* LiveViewController.m */; };
+		F07DE4171F4C20D400370C54 /* VersionSwitchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE40F1F4C20D400370C54 /* VersionSwitchHandler.m */; };
+		F07DE4181F4C20D400370C54 /* VodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4111F4C20D400370C54 /* VodViewController.m */; };
+		F07DE41A1F4C21D000370C54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F07DE4191F4C21D000370C54 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -100,9 +106,8 @@
 		588141FB1ECB0F690022A360 /* KSYUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYUIView.m; sourceTree = "<group>"; };
 		74B9ED581C158675003149E9 /* KSYPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSYPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B9ED5C1C158675003149E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		74B9ED5E1C158675003149E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		74B9ED5F1C158675003149E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		74B9ED651C158675003149E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		74B9ED5E1C158675003149E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = KSYPlayerDemo/AppDelegate.h; sourceTree = "<group>"; };
+		74B9ED5F1C158675003149E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = KSYPlayerDemo/AppDelegate.m; sourceTree = "<group>"; };
 		74B9ED671C158675003149E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74B9ED6A1C158675003149E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74B9ED6C1C158675003149E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,6 +130,19 @@
 		95B4A4111CC085BE00CB6804 /* QRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRViewController.m; sourceTree = "<group>"; };
 		E328B4D61CCE087400BD31FC /* KSYDBCreater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYDBCreater.h; sourceTree = "<group>"; };
 		E328B4D71CCE087400BD31FC /* KSYDBCreater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYDBCreater.m; sourceTree = "<group>"; };
+		F07DE4051F4C20D400370C54 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		F07DE4061F4C20D400370C54 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		F07DE4071F4C20D400370C54 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		F07DE4081F4C20D400370C54 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		F07DE40A1F4C20D400370C54 /* ChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceViewController.h; sourceTree = "<group>"; };
+		F07DE40B1F4C20D400370C54 /* ChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceViewController.m; sourceTree = "<group>"; };
+		F07DE40C1F4C20D400370C54 /* LiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveViewController.h; sourceTree = "<group>"; };
+		F07DE40D1F4C20D400370C54 /* LiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveViewController.m; sourceTree = "<group>"; };
+		F07DE40E1F4C20D400370C54 /* VersionSwitchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionSwitchHandler.h; sourceTree = "<group>"; };
+		F07DE40F1F4C20D400370C54 /* VersionSwitchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionSwitchHandler.m; sourceTree = "<group>"; };
+		F07DE4101F4C20D400370C54 /* VodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VodViewController.h; sourceTree = "<group>"; };
+		F07DE4111F4C20D400370C54 /* VodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VodViewController.m; sourceTree = "<group>"; };
+		F07DE4191F4C21D000370C54 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +234,9 @@
 		74B9ED4F1C158675003149E9 = {
 			isa = PBXGroup;
 			children = (
+				74B9ED5E1C158675003149E9 /* AppDelegate.h */,
+				74B9ED5F1C158675003149E9 /* AppDelegate.m */,
+				F07DE4031F4C20D400370C54 /* KSYPlayerDemoRefactor */,
 				74B9ED5A1C158675003149E9 /* KSYPlayerDemo */,
 				74B9ED591C158675003149E9 /* Products */,
 				581D3A7D1DE68CDA00051F63 /* Frameworks */,
@@ -247,9 +268,7 @@
 				95B4A40F1CC085BE00CB6804 /* KSYSQLiteManager.m */,
 				95B4A4101CC085BE00CB6804 /* QRViewController.h */,
 				95B4A4111CC085BE00CB6804 /* QRViewController.m */,
-				74B9ED5E1C158675003149E9 /* AppDelegate.h */,
-				74B9ED5F1C158675003149E9 /* AppDelegate.m */,
-				74B9ED641C158675003149E9 /* Main.storyboard */,
+				F07DE4191F4C21D000370C54 /* Main.storyboard */,
 				74B9ED671C158675003149E9 /* Assets.xcassets */,
 				74B9ED691C158675003149E9 /* LaunchScreen.storyboard */,
 				74B9ED6C1C158675003149E9 /* Info.plist */,
@@ -271,6 +290,49 @@
 				74B9ED5C1C158675003149E9 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F07DE4031F4C20D400370C54 /* KSYPlayerDemoRefactor */ = {
+			isa = PBXGroup;
+			children = (
+				F07DE4041F4C20D400370C54 /* Base */,
+				F07DE4091F4C20D400370C54 /* Controller */,
+				F07DE4121F4C20D400370C54 /* View */,
+			);
+			path = KSYPlayerDemoRefactor;
+			sourceTree = "<group>";
+		};
+		F07DE4041F4C20D400370C54 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				F07DE4051F4C20D400370C54 /* BaseNavigationController.h */,
+				F07DE4061F4C20D400370C54 /* BaseNavigationController.m */,
+				F07DE4071F4C20D400370C54 /* BaseViewController.h */,
+				F07DE4081F4C20D400370C54 /* BaseViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		F07DE4091F4C20D400370C54 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F07DE40A1F4C20D400370C54 /* ChoiceViewController.h */,
+				F07DE40B1F4C20D400370C54 /* ChoiceViewController.m */,
+				F07DE40C1F4C20D400370C54 /* LiveViewController.h */,
+				F07DE40D1F4C20D400370C54 /* LiveViewController.m */,
+				F07DE40E1F4C20D400370C54 /* VersionSwitchHandler.h */,
+				F07DE40F1F4C20D400370C54 /* VersionSwitchHandler.m */,
+				F07DE4101F4C20D400370C54 /* VodViewController.h */,
+				F07DE4111F4C20D400370C54 /* VodViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F07DE4121F4C20D400370C54 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,9 +395,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F07DE41A1F4C21D000370C54 /* Main.storyboard in Resources */,
 				74B9ED6B1C158675003149E9 /* LaunchScreen.storyboard in Resources */,
 				74B9ED681C158675003149E9 /* Assets.xcassets in Resources */,
-				74B9ED661C158675003149E9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,11 +408,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F07DE4161F4C20D400370C54 /* LiveViewController.m in Sources */,
+				F07DE4151F4C20D400370C54 /* ChoiceViewController.m in Sources */,
 				582CC6051F3072A200DFED24 /* KSYPlayerSubtitleView.m in Sources */,
 				582CC6041F30729E00DFED24 /* KSYPlayerPicView.m in Sources */,
 				582CC6031F30729900DFED24 /* KSYPlayerOtherView.m in Sources */,
 				582CC6021F30729300DFED24 /* KSYPlayerAudioView.m in Sources */,
 				587CEF481EFBA7BC0018F226 /* KSYSimplePlayVC.m in Sources */,
+				F07DE4141F4C20D400370C54 /* BaseViewController.m in Sources */,
 				588141F11ECB0F2F0022A360 /* KSYProgressView.m in Sources */,
 				588141EE1ECB0F2F0022A360 /* KSYPlayerCfgVC.m in Sources */,
 				955FDFC61CCF3EC300B37F54 /* ViewController.m in Sources */,
@@ -359,16 +424,19 @@
 				588141F21ECB0F2F0022A360 /* KSYURLTableVC.m in Sources */,
 				95B4A4131CC085BE00CB6804 /* KSYSQLite.m in Sources */,
 				74B9ED601C158675003149E9 /* AppDelegate.m in Sources */,
+				F07DE4171F4C20D400370C54 /* VersionSwitchHandler.m in Sources */,
 				E328B4D81CCE087400BD31FC /* KSYDBCreater.m in Sources */,
 				582096031EDED32600C38D0F /* KSYAVWriter.m in Sources */,
 				588141FD1ECB0F690022A360 /* KSYNameSlider.m in Sources */,
 				588141FF1ECB0F690022A360 /* KSYUIView.m in Sources */,
 				588141FC1ECB0F690022A360 /* KSYFileSelector.m in Sources */,
+				F07DE4181F4C20D400370C54 /* VodViewController.m in Sources */,
 				95B4A4141CC085BE00CB6804 /* KSYSQLiteManager.m in Sources */,
 				588141EC1ECB0F2F0022A360 /* KSYMonkeyTestVC.m in Sources */,
 				588141FE1ECB0F690022A360 /* KSYUIVC.m in Sources */,
 				95B4A4121CC085BE00CB6804 /* KSYLiveVC.m in Sources */,
 				588141ED1ECB0F2F0022A360 /* KSYNetTrackerVC.m in Sources */,
+				F07DE4131F4C20D400370C54 /* BaseNavigationController.m in Sources */,
 				74B9ED5D1C158675003149E9 /* main.m in Sources */,
 				588141F01ECB0F2F0022A360 /* KSYProberVC.m in Sources */,
 				588141EF1ECB0F2F0022A360 /* KSYPlayerVC.m in Sources */,
@@ -378,14 +446,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		74B9ED641C158675003149E9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				74B9ED651C158675003149E9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		74B9ED691C158675003149E9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
