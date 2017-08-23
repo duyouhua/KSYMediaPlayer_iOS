@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface VodViewController : BaseViewController
+@interface VodViewController : UIViewController
 
 @end

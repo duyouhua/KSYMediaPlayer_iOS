@@ -7,8 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "VideoModel.h"
+
+@class VideoModel;
 
 @interface VideoListViewModel : NSObject
+
 @property (nonatomic, strong) NSMutableArray<VideoModel*> *listViewDataSource;
+
+- (instancetype)initWithListDataSource:(NSMutableArray<VideoModel*> *)listViewDataSource;
+
+- (instancetype)initForTest;
+
 @end

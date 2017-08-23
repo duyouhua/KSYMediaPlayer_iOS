@@ -9,6 +9,7 @@
 #import "PlayerViewController.h"
 #import <KSYMediaPlayer/KSYMoviePlayerController.h>
 #import "PlayerViewModel.h"
+#import "VideoModel.h"
 #import "VideoContainerView.h"
 #import "SettingDataHandler.h"
 #import "SettingModel.h"
@@ -38,6 +39,10 @@
         _playerViewModel = playerViewModel;
     }
     return self;
+}
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:@"player"];
 }
 
 - (void)viewDidLoad {

@@ -15,4 +15,7 @@
 
 @property (nonatomic, strong) VideoListViewModel *videoListViewModel;
 
+- (instancetype)initWithPlayingVideoModel:(VideoModel *)playingVideoModel
+                       videoListViewModel:(VideoListViewModel *)videoListViewModel;
+
 @end

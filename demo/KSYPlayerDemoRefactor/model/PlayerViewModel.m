@@ -10,4 +10,13 @@
 
 @implementation PlayerViewModel
 
+- (instancetype)initWithPlayingVideoModel:(VideoModel *)playingVideoModel
+                       videoListViewModel:(VideoListViewModel *)videoListViewModel {
+    if (self = [super init]) {
+        _playingVideoModel = playingVideoModel;
+        _videoListViewModel = videoListViewModel;
+    }
+    return self;
+}
+
 @end

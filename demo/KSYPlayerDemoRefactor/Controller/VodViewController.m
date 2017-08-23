@@ -10,23 +10,98 @@
 #import "SettingViewController.h"
 #import "VideoListViewModel.h"
 #import "PlayerViewController.h"
+#import "FlowLayout.h"
+#import "Masonry.h"
+#import "VideoCollectionViewCell.h"
+#import "PlayerViewController.h"
+#import "PlayerViewModel.h"
 
-@interface VodViewController ()
+@interface VodViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, FlowLayoutDelegate>
 @property (nonatomic, strong) VideoListViewModel *videoListViewModel;
 @property (nonatomic, strong) UICollectionView   *videoCollectionView;
 @end
+
+static NSString * const kVideoCollectionViewCellId = @"kVideoCollectionViewCellId";
 
 @implementation VodViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupUI];
+    [self fetchDatasource];
 }
 
 - (IBAction)settingAction:(id)sender {
     [self.navigationController pushViewController:[[SettingViewController alloc] init] animated:YES];
 }
 
+- (void)fetchDatasource {
+    self.videoListViewModel = [[VideoListViewModel alloc] initForTest];
+    [self.videoCollectionView reloadData];
+}
 
+- (void)setupUI {
+    [self.view addSubview:self.videoCollectionView];
+    [self.videoCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+}
+
+- (UICollectionView *)videoCollectionView
+{
+    if (!_videoCollectionView)
+    {
+        _videoCollectionView = ({
+            
+            FlowLayout *flowLayout = [[FlowLayout alloc]init];
+            flowLayout.delegate = self;
+            
+            UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+            collectionView.dataSource = self;
+            collectionView.delegate = self;
+//            collectionView.backgroundColor = [UIColor brownColor];
+            collectionView.scrollsToTop = NO;
+            collectionView.alwaysBounceVertical = YES;
+            [collectionView registerNib:[UINib nibWithNibName:@"VideoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kVideoCollectionViewCellId];
+            collectionView;
+        });
+    }
+    return _videoCollectionView;
+}
+
+#pragma mark - CollectionView Datasource and Delegate
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return _videoListViewModel.listViewDataSource.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    VideoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kVideoCollectionViewCellId forIndexPath:indexPath];
+    if (indexPath.row < self.videoListViewModel.listViewDataSource.count) {
+        [cell configeWithVideoModel:self.videoListViewModel.listViewDataSource[indexPath.row]];
+    }
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    VideoModel *videoModel = nil;
+    if (indexPath.row < self.videoListViewModel.listViewDataSource.count) {
+        videoModel = self.videoListViewModel.listViewDataSource[indexPath.row];
+    }
+    if (videoModel) {
+        PlayerViewModel *playerViewModel = [[PlayerViewModel alloc] initWithPlayingVideoModel:videoModel videoListViewModel:_videoListViewModel];
+        PlayerViewController *pvc = [[PlayerViewController alloc] initWithPlayerViewModel:playerViewModel];
+        [self.navigationController pushViewController:pvc animated:YES];
+    }
+}
+
+#pragma mark --
+#pragma mark - FlowLayoutDelegate
+
+- (CGFloat)flowLayout:(FlowLayout *)flowLayout heightForRowAtIndexPath:(NSInteger )index itemWidth:(CGFloat)itemWidth {
+    return 96;
+}
 
 @end
