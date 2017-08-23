@@ -8,18 +8,34 @@
 
 #import "PlayerViewController.h"
 #import <KSYMediaPlayer/KSYMoviePlayerController.h>
-#import "VideoListViewModel.h"
+#import "PlayerViewModel.h"
+#import "VideoContainerView.h"
+#import "SettingDataHandler.h"
+#import "SettingModel.h"
+#import "Masonry.h"
 
 @interface PlayerViewController ()
-@property (nonatomic, strong) VideoListViewModel       *videoListViewModel;
+@property (nonatomic, strong) PlayerViewModel          *playerViewModel;
 @property (nonatomic, strong) KSYMoviePlayerController *player;
+@property (nonatomic, strong) VideoContainerView       *videoContainerView;
+/*
+ NSString* serverIp;
+ BOOL reloading;
+ long long int prepared_time;
+ int fvr_costtime;
+ int far_costtime;
+ */
+@property (nonatomic, copy)   NSString *serverIp;
+@property (nonatomic, assign) int64_t   prepared_time;
+@property (nonatomic, assign) int       fvr_costtime;
+@property (nonatomic, assign) int       far_costtime;
 @end
 
 @implementation PlayerViewController
 
-- (instancetype)initWithVideoListViewModel:(VideoListViewModel *)videoListViewModel {
+- (instancetype)initWithPlayerViewModel:(PlayerViewModel *)playerViewModel {
     if (self = [super init]) {
-        _videoListViewModel = videoListViewModel;
+        _playerViewModel = playerViewModel;
     }
     return self;
 }
@@ -27,36 +43,223 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self addObserver:self forKeyPath:@"player" options:NSKeyValueObservingOptionNew context:nil];
+    [self setupUI];
+    [self setupPlayer];
+}
+
+- (VideoContainerView *)videoContainerView {
+    if (!_videoContainerView) {
+        _videoContainerView = [[VideoContainerView alloc] init];
+    }
+    return _videoContainerView;
+}
+
+- (void)setupUI {
+    [self.view addSubview:self.videoContainerView];
+    [self.videoContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 - (void)setupPlayer {
     //初始化播放器并设置播放地址
-//    self.player = [[KSYMoviePlayerController alloc] initWithContentURL: aURL fileList:fileList sharegroup:nil];
-//    [self setupObservers:_player];
-//    _player.controlStyle = MPMovieControlStyleNone;
-//    [_player.view setFrame: videoView.bounds];  // player's frame must match parent's
-//    [videoView addSubview: _player.view];
-//    videoView.autoresizesSubviews = TRUE;
-//    _player.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-//    if(config)
-//    {
-//        //设置播放参数
-//        _player.videoDecoderMode = config.decodeMode;
+    self.player = [[KSYMoviePlayerController alloc] initWithContentURL: [NSURL URLWithString:_playerViewModel.playingVideoModel.vUrl] fileList:nil sharegroup:nil];
+    [self setupObservers:_player];
+    _player.controlStyle = MPMovieControlStyleNone;
+    [self.videoContainerView addSubview: _player.view];
+    [_player.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.videoContainerView);
+    }];
+    self.videoContainerView.autoresizesSubviews = TRUE;
+    _player.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    
+    SettingModel *settingModel = [SettingDataHandler getSettingModel];
+    
+    if(settingModel)
+    {
+        //设置播放参数
+        _player.videoDecoderMode = settingModel.videoDecoderMode;
 //        _player.scalingMode = config.contentMode;
 //        _player.shouldAutoplay = config.bAutoPlay;
 //        _player.deinterlaceMode = config.deinterlaceMode;
-//        _player.shouldLoop = config.bLoop;
+        _player.shouldLoop = settingModel.shouldLoop;
 //        _player.bInterruptOtherAudio = config.bAudioInterrupt;
-//        _player.bufferTimeMax = config.bufferTimeMax;
-//        _player.bufferSizeMax = config.bufferSizeMax;
-//        [_player setTimeout:config.connectTimeout readTimeout:config.readTimeout];
-//    }
-//    NSKeyValueObservingOptions opts = NSKeyValueObservingOptionNew;
-//    [_player addObserver:self forKeyPath:@"currentPlaybackTime" options:opts context:nil];
-//    [_player addObserver:self forKeyPath:@"clientIP" options:opts context:nil];
-//    [_player addObserver:self forKeyPath:@"localDNSIP" options:opts context:nil];
-//    prepared_time = (long long int)([self getCurrentTime] * 1000);
-//    [_player prepareToPlay];
+        _player.bufferTimeMax = settingModel.bufferTimeMax;
+        _player.bufferSizeMax = settingModel.bufferSizeMax;
+        [_player setTimeout:(int)settingModel.preparetimeOut readTimeout:(int)settingModel.readtimeOut];
+    }
+    NSKeyValueObservingOptions opts = NSKeyValueObservingOptionNew;
+    [_player addObserver:self forKeyPath:@"currentPlaybackTime" options:opts context:nil];
+    [_player addObserver:self forKeyPath:@"clientIP" options:opts context:nil];
+    [_player addObserver:self forKeyPath:@"localDNSIP" options:opts context:nil];
+    self.prepared_time = (long long int)([[NSDate date] timeIntervalSince1970] * 1000);
+    [_player prepareToPlay];
+}
+
+- (void)registerObserver:(NSString *)notification player:(KSYMoviePlayerController*)player {
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(handlePlayerNotify:)
+                                                name:(notification)
+                                              object:player];
+}
+
+- (void)setupObservers:(KSYMoviePlayerController*)player
+{
+    [self registerObserver:MPMediaPlaybackIsPreparedToPlayDidChangeNotification player:player];
+    [self registerObserver:MPMoviePlayerPlaybackStateDidChangeNotification player:player];
+    [self registerObserver:MPMoviePlayerPlaybackDidFinishNotification player:player];
+    [self registerObserver:MPMoviePlayerLoadStateDidChangeNotification player:player];
+    [self registerObserver:MPMovieNaturalSizeAvailableNotification player:player];
+    [self registerObserver:MPMoviePlayerFirstVideoFrameRenderedNotification player:player];
+    [self registerObserver:MPMoviePlayerFirstAudioFrameRenderedNotification player:player];
+    [self registerObserver:MPMoviePlayerSuggestReloadNotification player:player];
+    [self registerObserver:MPMoviePlayerPlaybackStatusNotification player:player];
+    [self registerObserver:MPMoviePlayerNetworkStatusChangeNotification player:player];
+    [self registerObserver:MPMoviePlayerSeekCompleteNotification player:player];
+}
+
+#pragma mark --
+#pragma mark - notification handler
+
+-(void)handlePlayerNotify:(NSNotification*)notify
+{
+    /*
+    if (!_player) {
+        return;
+    }
+    if (MPMediaPlaybackIsPreparedToPlayDidChangeNotification ==  notify.name) {
+        progressView.totalTimeInSeconds = _player.duration;
+        if(_player.shouldAutoplay == NO)
+            [_player play];
+        serverIp = [_player serverAddress];
+        NSLog(@"KSYPlayerVC: %@ -- ip:%@", [[_player contentURL] absoluteString], serverIp);
+        reloading = NO;
+    }
+    if (MPMoviePlayerPlaybackStateDidChangeNotification ==  notify.name) {
+        NSLog(@"------------------------");
+        NSLog(@"player playback state: %ld", (long)_player.playbackState);
+        NSLog(@"------------------------");
+    }
+    if (MPMoviePlayerLoadStateDidChangeNotification ==  notify.name) {
+        NSLog(@"player load state: %ld", (long)_player.loadState);
+        if (MPMovieLoadStateStalled & _player.loadState) {
+            NSLog(@"player start caching");
+        }
+        if (_player.bufferEmptyCount &&
+            (MPMovieLoadStatePlayable & _player.loadState ||
+             MPMovieLoadStatePlaythroughOK & _player.loadState)){
+                NSLog(@"player finish caching");
+                NSString *message = [[NSString alloc]initWithFormat:@"loading occurs, %d - %0.3fs",
+                                     (int)_player.bufferEmptyCount,
+                                     _player.bufferEmptyDuration];
+                [self toast:message];
+            }
+    }
+    if (MPMoviePlayerPlaybackDidFinishNotification ==  notify.name) {
+        NSLog(@"player finish state: %ld", (long)_player.playbackState);
+        NSLog(@"player download flow size: %f MB", _player.readSize);
+        NSLog(@"buffer monitor  result: \n   empty count: %d, lasting: %f seconds",
+              (int)_player.bufferEmptyCount,
+              _player.bufferEmptyDuration);
+    }
+    if (MPMovieNaturalSizeAvailableNotification ==  notify.name) {
+        NSLog(@"video size %.0f-%.0f, rotate:%ld\n", _player.naturalSize.width, _player.naturalSize.height, (long)_player.naturalRotate);
+        if(((_player.naturalRotate / 90) % 2  == 0 && _player.naturalSize.width > _player.naturalSize.height) ||
+           ((_player.naturalRotate / 90) % 2 != 0 && _player.naturalSize.width < _player.naturalSize.height))
+        {
+            //如果想要在宽大于高的时候横屏播放，你可以在这里旋转
+        }
+    }
+    if (MPMoviePlayerFirstVideoFrameRenderedNotification == notify.name)
+    {
+        fvr_costtime = (int)((long long int)([self getCurrentTime] * 1000) - prepared_time);
+        NSLog(@"first video frame show, cost time : %dms!\n", fvr_costtime);
+    }
+    if (MPMoviePlayerFirstAudioFrameRenderedNotification == notify.name)
+    {
+        far_costtime = (int)((long long int)([self getCurrentTime] * 1000) - prepared_time);
+        NSLog(@"first audio frame render, cost time : %dms!\n", far_costtime);
+    }
+    if (MPMoviePlayerSuggestReloadNotification == notify.name)
+    {
+        NSLog(@"suggest using reload function!\n");
+        if(!reloading)
+        {
+            reloading = YES;
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(){
+                if (_player) {
+                    NSLog(@"reload stream");
+                    [_player reload:_reloadUrl flush:YES mode:MPMovieReloadMode_Accurate];
+                }
+            });
+        }
+    }
+    if(MPMoviePlayerPlaybackStatusNotification == notify.name)
+    {
+        int status = [[[notify userInfo] valueForKey:MPMoviePlayerPlaybackStatusUserInfoKey] intValue];
+        if(MPMovieStatusVideoDecodeWrong == status)
+            NSLog(@"Video Decode Wrong!\n");
+        else if(MPMovieStatusAudioDecodeWrong == status)
+            NSLog(@"Audio Decode Wrong!\n");
+        else if (MPMovieStatusHWCodecUsed == status )
+            NSLog(@"Hardware Codec used\n");
+        else if (MPMovieStatusSWCodecUsed == status )
+            NSLog(@"Software Codec used\n");
+        else if(MPMovieStatusDLCodecUsed == status)
+            NSLog(@"AVSampleBufferDisplayLayer  Codec used");
+    }
+    if(MPMoviePlayerNetworkStatusChangeNotification == notify.name)
+    {
+        int currStatus = [[[notify userInfo] valueForKey:MPMoviePlayerCurrNetworkStatusUserInfoKey] intValue];
+        int lastStatus = [[[notify userInfo] valueForKey:MPMoviePlayerLastNetworkStatusUserInfoKey] intValue];
+        NSLog(@"network reachable change from %@ to %@\n", [self netStatus2Str:lastStatus], [self netStatus2Str:currStatus]);
+    }
+    if(MPMoviePlayerSeekCompleteNotification == notify.name)
+    {
+        NSLog(@"Seek complete");
+    }
+     */
+}
+
+#pragma mark --
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    /*
+    if([keyPath isEqual:@"currentPlaybackTime"])
+    {
+        progressView.playProgress = _player.currentPlaybackTime / _player.duration;
+    }
+    else if([keyPath isEqual:@"clientIP"])
+    {
+        NSLog(@"client IP is %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
+    }
+    else if([keyPath isEqual:@"localDNSIP"])
+    {
+        NSLog(@"local DNS IP is %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
+    }
+    else if ([keyPath isEqualToString:@"player"]) {
+        if (_player) {
+            progressView.hidden = NO;
+            __weak typeof(_player) weakPlayer = _player;
+            progressView.dragingSliderCallback = ^(float progress){
+                typeof(weakPlayer) strongPlayer = weakPlayer;
+                double seekPos = progress * strongPlayer.duration;
+                //strongPlayer.currentPlaybackTime = progress * strongPlayer.duration;
+                //使用currentPlaybackTime设置为依靠关键帧定位
+                //使用seekTo:accurate并且将accurate设置为YES时为精确定位
+                [strongPlayer seekTo:seekPos accurate:YES];
+            };
+        } else {
+            progressView.hidden = YES;
+        }
+    }
+     */
 }
 
 @end

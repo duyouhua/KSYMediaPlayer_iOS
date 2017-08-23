@@ -10,10 +10,17 @@
 #import <KSYMediaPlayer/KSYMoviePlayerDefines.h>
 
 @interface SettingModel : NSObject
+
 @property (nonatomic, assign) MPMovieVideoDecoderMode videoDecoderMode;
-@property (nonatomic, assign) float bufferTimeMax;
-@property (nonatomic, assign) float bufferSizeMax;
-@property (nonatomic, assign) float preparetimeOut;
-@property (nonatomic, assign) float readtimeOut;
-@property (nonatomic, assign) BOOL  isLoopPlay;
+
+@property (nonatomic, assign) NSTimeInterval bufferTimeMax;
+
+@property (nonatomic, assign) NSTimeInterval bufferSizeMax;
+
+@property (nonatomic, assign) NSInteger preparetimeOut;
+
+@property (nonatomic, assign) NSInteger readtimeOut;
+
+@property (nonatomic, assign) BOOL  shouldLoop;
+
 @end

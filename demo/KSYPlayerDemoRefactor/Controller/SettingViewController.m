@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 获取设置信息（之前的设置）
 }
 
 

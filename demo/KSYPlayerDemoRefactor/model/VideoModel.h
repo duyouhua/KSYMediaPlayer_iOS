@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SettingModel.h"
 
 @interface VideoModel : NSObject
 
@@ -16,7 +15,5 @@
 @property (nonatomic, copy)   NSString *vCoverImageUrl;
 
 @property (nonatomic, copy)   NSString *vUrl;
-
-@property (nonatomic, strong) SettingModel   *vSettingModel;
 
 @end

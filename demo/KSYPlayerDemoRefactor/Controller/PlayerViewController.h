@@ -8,10 +8,10 @@
 
 #import "BaseViewController.h"
 
-@class VideoListViewModel;
+@class PlayerViewModel;
 
 @interface PlayerViewController : BaseViewController
 
-- (instancetype)initWithVideoListViewModel:(VideoListViewModel *)videoListViewModel;
+- (instancetype)initWithPlayerViewModel:(PlayerViewModel *)playerViewModel;
 
 @end
