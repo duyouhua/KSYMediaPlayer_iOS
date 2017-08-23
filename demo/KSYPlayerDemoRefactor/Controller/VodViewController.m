@@ -15,13 +15,15 @@
 #import "VideoCollectionViewCell.h"
 #import "PlayerViewController.h"
 #import "PlayerViewModel.h"
+#import "Constant.h"
+#import "VideoCollectionHeaderView.h"
 
 @interface VodViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, FlowLayoutDelegate>
-@property (nonatomic, strong) VideoListViewModel *videoListViewModel;
-@property (nonatomic, strong) UICollectionView   *videoCollectionView;
+@property (nonatomic, strong) VideoListViewModel        *videoListViewModel;
+@property (nonatomic, strong) UICollectionView          *videoCollectionView;
+@property (nonatomic, strong) VideoCollectionHeaderView *headerView;
 @end
 
-static NSString * const kVideoCollectionViewCellId = @"kVideoCollectionViewCellId";
 
 @implementation VodViewController
 
@@ -38,13 +40,21 @@ static NSString * const kVideoCollectionViewCellId = @"kVideoCollectionViewCellI
 
 - (void)fetchDatasource {
     self.videoListViewModel = [[VideoListViewModel alloc] initForTest];
+    [self.headerView configeVideoModel:self.videoListViewModel.listViewDataSource.firstObject];
     [self.videoCollectionView reloadData];
 }
 
 - (void)setupUI {
+    [self.view addSubview:self.headerView];
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.top.equalTo(self.view);
+        make.height.mas_equalTo(197);
+    }];
+    
     [self.view addSubview:self.videoCollectionView];
     [self.videoCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.top.equalTo(self.headerView.mas_bottom).offset(10);
+        make.leading.trailing.bottom.equalTo(self.view);
     }];
 }
 
@@ -60,7 +70,6 @@ static NSString * const kVideoCollectionViewCellId = @"kVideoCollectionViewCellI
             UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
             collectionView.dataSource = self;
             collectionView.delegate = self;
-//            collectionView.backgroundColor = [UIColor brownColor];
             collectionView.scrollsToTop = NO;
             collectionView.alwaysBounceVertical = YES;
             [collectionView registerNib:[UINib nibWithNibName:@"VideoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kVideoCollectionViewCellId];
@@ -68,6 +77,27 @@ static NSString * const kVideoCollectionViewCellId = @"kVideoCollectionViewCellI
         });
     }
     return _videoCollectionView;
+}
+
+- (VideoCollectionHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[NSBundle mainBundle] loadNibNamed:@"VideoCollectionHeaderView" owner:self options:nil].firstObject;
+        __weak typeof(self) weakSelf = self;
+        _headerView.tapBlock = ^{
+            typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf didSelectedVideoHandler:strongSelf.videoListViewModel.listViewDataSource.firstObject];
+        };
+    }
+    return _headerView;
+}
+
+- (void)didSelectedVideoHandler:(VideoModel *)videoModel {
+    if (!videoModel) {
+        return;
+    }
+    PlayerViewModel *playerViewModel = [[PlayerViewModel alloc] initWithPlayingVideoModel:videoModel videoListViewModel:_videoListViewModel];
+    PlayerViewController *pvc = [[PlayerViewController alloc] initWithPlayerViewModel:playerViewModel];
+    [self.navigationController pushViewController:pvc animated:YES];
 }
 
 #pragma mark - CollectionView Datasource and Delegate
@@ -91,9 +121,7 @@ static NSString * const kVideoCollectionViewCellId = @"kVideoCollectionViewCellI
         videoModel = self.videoListViewModel.listViewDataSource[indexPath.row];
     }
     if (videoModel) {
-        PlayerViewModel *playerViewModel = [[PlayerViewModel alloc] initWithPlayingVideoModel:videoModel videoListViewModel:_videoListViewModel];
-        PlayerViewController *pvc = [[PlayerViewController alloc] initWithPlayerViewModel:playerViewModel];
-        [self.navigationController pushViewController:pvc animated:YES];
+        [self didSelectedVideoHandler:videoModel];
     }
 }
 
@@ -101,7 +129,7 @@ static NSString * const kVideoCollectionViewCellId = @"kVideoCollectionViewCellI
 #pragma mark - FlowLayoutDelegate
 
 - (CGFloat)flowLayout:(FlowLayout *)flowLayout heightForRowAtIndexPath:(NSInteger )index itemWidth:(CGFloat)itemWidth {
-    return 96;
+    return kVideoCollectionViewCellHeight;
 }
 
 @end

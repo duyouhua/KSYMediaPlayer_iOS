@@ -91,6 +91,8 @@
 		F07DE4EA1F4D703F00370C54 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4D41F4D703F00370C54 /* UIImageView+WebCache.m */; };
 		F07DE4EB1F4D703F00370C54 /* UIView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4D61F4D703F00370C54 /* UIView+WebCache.m */; };
 		F07DE4EC1F4D703F00370C54 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4D81F4D703F00370C54 /* UIView+WebCacheOperation.m */; };
+		F07DE4F21F4D999F00370C54 /* VideoCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07DE4F11F4D999F00370C54 /* VideoCollectionHeaderView.xib */; };
+		F07DE4F51F4D99D500370C54 /* VideoCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4F41F4D99D500370C54 /* VideoCollectionHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -270,6 +272,10 @@
 		F07DE4D61F4D703F00370C54 /* UIView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCache.m"; sourceTree = "<group>"; };
 		F07DE4D71F4D703F00370C54 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		F07DE4D81F4D703F00370C54 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		F07DE4EE1F4D97DF00370C54 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		F07DE4F11F4D999F00370C54 /* VideoCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCollectionHeaderView.xib; sourceTree = "<group>"; };
+		F07DE4F31F4D99D500370C54 /* VideoCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCollectionHeaderView.h; sourceTree = "<group>"; };
+		F07DE4F41F4D99D500370C54 /* VideoCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCollectionHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -469,6 +475,9 @@
 				F07DE4A91F4D6C3300370C54 /* VideoCollectionViewCell.h */,
 				F07DE4AA1F4D6C3300370C54 /* VideoCollectionViewCell.m */,
 				F07DE4AB1F4D6C3300370C54 /* VideoCollectionViewCell.xib */,
+				F07DE4F31F4D99D500370C54 /* VideoCollectionHeaderView.h */,
+				F07DE4F41F4D99D500370C54 /* VideoCollectionHeaderView.m */,
+				F07DE4F11F4D999F00370C54 /* VideoCollectionHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -495,6 +504,7 @@
 				F07DE43B1F4C5AC500370C54 /* VideoListViewModel.m */,
 				F07DE4471F4D459300370C54 /* PlayerViewModel.h */,
 				F07DE4481F4D459300370C54 /* PlayerViewModel.m */,
+				F07DE4EE1F4D97DF00370C54 /* Constant.h */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -669,6 +679,7 @@
 				F07DE41A1F4C21D000370C54 /* Main.storyboard in Resources */,
 				74B9ED6B1C158675003149E9 /* LaunchScreen.storyboard in Resources */,
 				74B9ED681C158675003149E9 /* Assets.xcassets in Resources */,
+				F07DE4F21F4D999F00370C54 /* VideoCollectionHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,6 +727,7 @@
 				F07DE4DF1F4D703F00370C54 /* SDWebImageCompat.m in Sources */,
 				95B4A4151CC085BE00CB6804 /* QRViewController.m in Sources */,
 				588141F21ECB0F2F0022A360 /* KSYURLTableVC.m in Sources */,
+				F07DE4F51F4D99D500370C54 /* VideoCollectionHeaderView.m in Sources */,
 				95B4A4131CC085BE00CB6804 /* KSYSQLite.m in Sources */,
 				F07DE4991F4D589F00370C54 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				F07DE4301F4C4FD200370C54 /* PlayerViewController.m in Sources */,

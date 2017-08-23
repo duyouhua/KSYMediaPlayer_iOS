@@ -15,7 +15,7 @@ static const NSInteger DefaultColumnCpunt = 2;
 static const CGFloat DefaultColumnMargin = 13;
 
 //没一行之间的间距
-static const CGFloat DefaultRowMargin = 13;
+static const CGFloat DefaultRowMargin = 7;
 
 //边缘间距
 static const UIEdgeInsets DefaultEdgeInsets = {0,13,2,13};
