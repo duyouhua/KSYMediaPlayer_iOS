@@ -14,22 +14,19 @@
 #import "SettingDataHandler.h"
 #import "SettingModel.h"
 #import "Masonry.h"
+#import "PlayerTableViewCell.h"
+#import "Constant.h"
 
-@interface PlayerViewController ()
+@interface PlayerViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) PlayerViewModel          *playerViewModel;
 @property (nonatomic, strong) KSYMoviePlayerController *player;
 @property (nonatomic, strong) VideoContainerView       *videoContainerView;
-/*
- NSString* serverIp;
- BOOL reloading;
- long long int prepared_time;
- int fvr_costtime;
- int far_costtime;
- */
-@property (nonatomic, copy)   NSString *serverIp;
+@property (nonatomic, strong) UITableView              *videoTableView;
+@property (nonatomic, strong) UIButton                 *backButton;
 @property (nonatomic, assign) int64_t   prepared_time;
 @property (nonatomic, assign) int       fvr_costtime;
 @property (nonatomic, assign) int       far_costtime;
+@property (nonatomic, copy)   NSString *serverIp;
 @end
 
 @implementation PlayerViewController
@@ -43,6 +40,7 @@
 
 - (void)dealloc {
     [self removeObserver:self forKeyPath:@"player"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -55,15 +53,53 @@
 
 - (VideoContainerView *)videoContainerView {
     if (!_videoContainerView) {
-        _videoContainerView = [[VideoContainerView alloc] init];
+        _videoContainerView = [[NSBundle mainBundle] loadNibNamed:@"VideoContainerView" owner:self options:nil].firstObject;
     }
     return _videoContainerView;
 }
 
+- (UITableView *)videoTableView {
+    if (!_videoTableView) {
+        _videoTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _videoTableView.dataSource = self;
+        _videoTableView.delegate = self;
+        _videoTableView.rowHeight = 88;
+        [_videoTableView registerNib:[UINib nibWithNibName:@"PlayerTableViewCell" bundle:nil] forCellReuseIdentifier:kPlayerTableViewCellId];
+    }
+    return _videoTableView;
+}
+
+- (UIButton *)backButton {
+    if (!_backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+        [_backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _backButton;
+}
+
+- (void)backAction {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)setupUI {
+    self.navigationController.navigationBarHidden = YES;
+    
     [self.view addSubview:self.videoContainerView];
+    [self.view addSubview:self.videoTableView];
+    [self.view addSubview:self.backButton];
+    
     [self.videoContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.leading.trailing.top.equalTo(self.view);
+        make.height.mas_equalTo(211);
+    }];
+    [self.videoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.videoContainerView.mas_bottom).offset(2);
+        make.leading.trailing.bottom.equalTo(self.view);
+    }];
+    [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.mas_equalTo(18);
+        make.width.height.mas_equalTo(22);
     }];
 }
 
@@ -122,6 +158,28 @@
     [self registerObserver:MPMoviePlayerPlaybackStatusNotification player:player];
     [self registerObserver:MPMoviePlayerNetworkStatusChangeNotification player:player];
     [self registerObserver:MPMoviePlayerSeekCompleteNotification player:player];
+}
+
+#pragma mark --
+#pragma mark - table dataSource and delegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _playerViewModel.videoListViewModel.listViewDataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PlayerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPlayerTableViewCellId];
+    if (indexPath.row < _playerViewModel.videoListViewModel.listViewDataSource.count) {
+        [cell configeWithVideoModel:_playerViewModel.videoListViewModel.listViewDataSource[indexPath.row]];
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < _playerViewModel.videoListViewModel.listViewDataSource.count) {
+        VideoModel *videoModel = _playerViewModel.videoListViewModel.listViewDataSource[indexPath.row];
+        // 切换视频资源
+    }
 }
 
 #pragma mark --

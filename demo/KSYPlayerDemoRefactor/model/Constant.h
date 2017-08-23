@@ -9,4 +9,5 @@
 #import <Foundation/Foundation.h>
 
 static NSString * const kVideoCollectionViewCellId = @"kVideoCollectionViewCellId";
+static NSString * const kPlayerTableViewCellId     = @"kPlayerTableViewCellId";
 static CGFloat    const kVideoCollectionViewCellHeight = 116;

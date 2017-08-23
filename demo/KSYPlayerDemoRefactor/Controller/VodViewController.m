@@ -46,12 +46,12 @@
 
 - (void)setupUI {
     [self.view addSubview:self.headerView];
+    [self.view addSubview:self.videoCollectionView];
+    
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.top.equalTo(self.view);
         make.height.mas_equalTo(197);
     }];
-    
-    [self.view addSubview:self.videoCollectionView];
     [self.videoCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.headerView.mas_bottom).offset(10);
         make.leading.trailing.bottom.equalTo(self.view);
@@ -63,10 +63,8 @@
     if (!_videoCollectionView)
     {
         _videoCollectionView = ({
-            
             FlowLayout *flowLayout = [[FlowLayout alloc]init];
             flowLayout.delegate = self;
-            
             UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
             collectionView.dataSource = self;
             collectionView.delegate = self;

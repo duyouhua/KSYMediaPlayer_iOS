@@ -93,6 +93,9 @@
 		F07DE4EC1F4D703F00370C54 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4D81F4D703F00370C54 /* UIView+WebCacheOperation.m */; };
 		F07DE4F21F4D999F00370C54 /* VideoCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07DE4F11F4D999F00370C54 /* VideoCollectionHeaderView.xib */; };
 		F07DE4F51F4D99D500370C54 /* VideoCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F07DE4F41F4D99D500370C54 /* VideoCollectionHeaderView.m */; };
+		F0E6FDA61F4DAB6000BA549A /* VideoContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0E6FDA51F4DAB6000BA549A /* VideoContainerView.xib */; };
+		F0E6FDAA1F4DACF300BA549A /* PlayerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FDA81F4DACF300BA549A /* PlayerTableViewCell.m */; };
+		F0E6FDAB1F4DACF300BA549A /* PlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0E6FDA91F4DACF300BA549A /* PlayerTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -276,6 +279,10 @@
 		F07DE4F11F4D999F00370C54 /* VideoCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCollectionHeaderView.xib; sourceTree = "<group>"; };
 		F07DE4F31F4D99D500370C54 /* VideoCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCollectionHeaderView.h; sourceTree = "<group>"; };
 		F07DE4F41F4D99D500370C54 /* VideoCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCollectionHeaderView.m; sourceTree = "<group>"; };
+		F0E6FDA51F4DAB6000BA549A /* VideoContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoContainerView.xib; sourceTree = "<group>"; };
+		F0E6FDA71F4DACF300BA549A /* PlayerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTableViewCell.h; sourceTree = "<group>"; };
+		F0E6FDA81F4DACF300BA549A /* PlayerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTableViewCell.m; sourceTree = "<group>"; };
+		F0E6FDA91F4DACF300BA549A /* PlayerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -472,9 +479,13 @@
 			children = (
 				F07DE4441F4D44E500370C54 /* VideoContainerView.h */,
 				F07DE4451F4D44E500370C54 /* VideoContainerView.m */,
+				F0E6FDA51F4DAB6000BA549A /* VideoContainerView.xib */,
 				F07DE4A91F4D6C3300370C54 /* VideoCollectionViewCell.h */,
 				F07DE4AA1F4D6C3300370C54 /* VideoCollectionViewCell.m */,
 				F07DE4AB1F4D6C3300370C54 /* VideoCollectionViewCell.xib */,
+				F0E6FDA71F4DACF300BA549A /* PlayerTableViewCell.h */,
+				F0E6FDA81F4DACF300BA549A /* PlayerTableViewCell.m */,
+				F0E6FDA91F4DACF300BA549A /* PlayerTableViewCell.xib */,
 				F07DE4F31F4D99D500370C54 /* VideoCollectionHeaderView.h */,
 				F07DE4F41F4D99D500370C54 /* VideoCollectionHeaderView.m */,
 				F07DE4F11F4D999F00370C54 /* VideoCollectionHeaderView.xib */,
@@ -674,11 +685,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0E6FDAB1F4DACF300BA549A /* PlayerTableViewCell.xib in Resources */,
 				F07DE4AD1F4D6C3300370C54 /* VideoCollectionViewCell.xib in Resources */,
 				F07DE4911F4D589F00370C54 /* Info.plist in Resources */,
 				F07DE41A1F4C21D000370C54 /* Main.storyboard in Resources */,
 				74B9ED6B1C158675003149E9 /* LaunchScreen.storyboard in Resources */,
 				74B9ED681C158675003149E9 /* Assets.xcassets in Resources */,
+				F0E6FDA61F4DAB6000BA549A /* VideoContainerView.xib in Resources */,
 				F07DE4F21F4D999F00370C54 /* VideoCollectionHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -739,6 +752,7 @@
 				F07DE4931F4D589F00370C54 /* MASConstraint.m in Sources */,
 				588141FF1ECB0F690022A360 /* KSYUIView.m in Sources */,
 				F07DE4391F4C593700370C54 /* VideoModel.m in Sources */,
+				F0E6FDAA1F4DACF300BA549A /* PlayerTableViewCell.m in Sources */,
 				588141FC1ECB0F690022A360 /* KSYFileSelector.m in Sources */,
 				F07DE4181F4C20D400370C54 /* VodViewController.m in Sources */,
 				F07DE49B1F4D589F00370C54 /* ViewController+MASAdditions.m in Sources */,
