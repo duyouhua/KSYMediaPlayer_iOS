@@ -7,7 +7,6 @@
 //
 
 #import "VodViewController.h"
-#import "SettingViewController.h"
 #import "VideoListViewModel.h"
 #import "PlayerViewController.h"
 #import "FlowLayout.h"
@@ -32,10 +31,6 @@
     
     [self setupUI];
     [self fetchDatasource];
-}
-
-- (IBAction)settingAction:(id)sender {
-    [self.navigationController pushViewController:[[SettingViewController alloc] init] animated:YES];
 }
 
 - (void)fetchDatasource {

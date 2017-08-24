@@ -1,5 +1,5 @@
 //
-//  SettingViewController.h
+//  TableViewController.h
 //  KSYPlayerDemo
 //
 //  Created by devcdl on 2017/8/24.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingViewController : UITableViewController
+@interface TableViewController : UITableViewController
 
 @end
