@@ -53,7 +53,8 @@
 
 - (VideoContainerView *)videoContainerView {
     if (!_videoContainerView) {
-        _videoContainerView = [[NSBundle mainBundle] loadNibNamed:@"VideoContainerView" owner:self options:nil].firstObject;
+        _videoContainerView = [[VideoContainerView alloc] init];
+        _videoContainerView.backgroundColor = [UIColor brownColor];
     }
     return _videoContainerView;
 }
@@ -109,6 +110,7 @@
     [self setupObservers:_player];
     _player.controlStyle = MPMovieControlStyleNone;
     [self.videoContainerView addSubview: _player.view];
+    [self.videoContainerView sendSubviewToBack:_player.view];
     [_player.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.videoContainerView);
     }];

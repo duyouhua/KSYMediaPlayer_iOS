@@ -97,6 +97,8 @@
 		F0E6FDAB1F4DACF300BA549A /* PlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0E6FDA91F4DACF300BA549A /* PlayerTableViewCell.xib */; };
 		F0E6FDB11F4E7BBA00BA549A /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FDB01F4E7BBA00BA549A /* TableViewController.m */; };
 		F0E6FDB41F4E7D9100BA549A /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FDB31F4E7D9100BA549A /* SettingViewController.m */; };
+		F0E6FDB71F4EC72F00BA549A /* VodPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FDB61F4EC72F00BA549A /* VodPlayControlView.m */; };
+		F0E6FDB91F4EC74300BA549A /* VodPlayControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0E6FDB81F4EC74300BA549A /* VodPlayControlView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -286,6 +288,9 @@
 		F0E6FDB01F4E7BBA00BA549A /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		F0E6FDB21F4E7D9100BA549A /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		F0E6FDB31F4E7D9100BA549A /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		F0E6FDB51F4EC72F00BA549A /* VodPlayControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VodPlayControlView.h; sourceTree = "<group>"; };
+		F0E6FDB61F4EC72F00BA549A /* VodPlayControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VodPlayControlView.m; sourceTree = "<group>"; };
+		F0E6FDB81F4EC74300BA549A /* VodPlayControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VodPlayControlView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -494,6 +499,9 @@
 				F07DE4F31F4D99D500370C54 /* VideoCollectionHeaderView.h */,
 				F07DE4F41F4D99D500370C54 /* VideoCollectionHeaderView.m */,
 				F07DE4F11F4D999F00370C54 /* VideoCollectionHeaderView.xib */,
+				F0E6FDB51F4EC72F00BA549A /* VodPlayControlView.h */,
+				F0E6FDB61F4EC72F00BA549A /* VodPlayControlView.m */,
+				F0E6FDB81F4EC74300BA549A /* VodPlayControlView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -695,6 +703,7 @@
 				F07DE4911F4D589F00370C54 /* Info.plist in Resources */,
 				F07DE41A1F4C21D000370C54 /* Main.storyboard in Resources */,
 				74B9ED6B1C158675003149E9 /* LaunchScreen.storyboard in Resources */,
+				F0E6FDB91F4EC74300BA549A /* VodPlayControlView.xib in Resources */,
 				74B9ED681C158675003149E9 /* Assets.xcassets in Resources */,
 				F0E6FDA61F4DAB6000BA549A /* VideoContainerView.xib in Resources */,
 				F07DE4F21F4D999F00370C54 /* VideoCollectionHeaderView.xib in Resources */,
@@ -745,6 +754,7 @@
 				F07DE4DF1F4D703F00370C54 /* SDWebImageCompat.m in Sources */,
 				F0E6FDB41F4E7D9100BA549A /* SettingViewController.m in Sources */,
 				95B4A4151CC085BE00CB6804 /* QRViewController.m in Sources */,
+				F0E6FDB71F4EC72F00BA549A /* VodPlayControlView.m in Sources */,
 				588141F21ECB0F2F0022A360 /* KSYURLTableVC.m in Sources */,
 				F07DE4F51F4D99D500370C54 /* VideoCollectionHeaderView.m in Sources */,
 				95B4A4131CC085BE00CB6804 /* KSYSQLite.m in Sources */,
