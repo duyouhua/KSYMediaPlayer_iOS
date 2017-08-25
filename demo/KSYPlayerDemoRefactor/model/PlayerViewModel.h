@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "VideoListViewModel.h"
+
+@class VideoContainerView;
 
 @interface PlayerViewModel : NSObject
 
@@ -15,7 +18,12 @@
 
 @property (nonatomic, strong) VideoListViewModel *videoListViewModel;
 
+@property (nonatomic, weak) UIViewController *owner;
+
 - (instancetype)initWithPlayingVideoModel:(VideoModel *)playingVideoModel
                        videoListViewModel:(VideoListViewModel *)videoListViewModel;
+
+- (void)fullScreenHandlerForView:(VideoContainerView *)aView
+                   isFullScreen:(BOOL) isFullScreen;
 
 @end

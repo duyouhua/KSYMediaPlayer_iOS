@@ -22,7 +22,6 @@
 @property (nonatomic, strong) KSYMoviePlayerController *player;
 @property (nonatomic, strong) VideoContainerView       *videoContainerView;
 @property (nonatomic, strong) UITableView              *videoTableView;
-@property (nonatomic, strong) UIButton                 *backButton;
 @property (nonatomic, assign) int64_t   prepared_time;
 @property (nonatomic, assign) int       fvr_costtime;
 @property (nonatomic, assign) int       far_costtime;
@@ -34,6 +33,7 @@
 - (instancetype)initWithPlayerViewModel:(PlayerViewModel *)playerViewModel {
     if (self = [super init]) {
         _playerViewModel = playerViewModel;
+        _playerViewModel.owner = self;
     }
     return self;
 }
@@ -53,7 +53,11 @@
 
 - (VideoContainerView *)videoContainerView {
     if (!_videoContainerView) {
-        _videoContainerView = [[VideoContainerView alloc] init];
+        __weak typeof(self) weakSelf = self;
+        _videoContainerView = [[VideoContainerView alloc] initWithFullScreenBlock:^(BOOL isFullScreen){
+            typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf.playerViewModel fullScreenHandlerForView:strongSelf.videoContainerView isFullScreen:isFullScreen];
+        }];
         _videoContainerView.backgroundColor = [UIColor brownColor];
     }
     return _videoContainerView;
@@ -70,37 +74,19 @@
     return _videoTableView;
 }
 
-- (UIButton *)backButton {
-    if (!_backButton) {
-        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-        [_backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _backButton;
-}
-
-- (void)backAction {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)setupUI {
     self.navigationController.navigationBarHidden = YES;
     
-    [self.view addSubview:self.videoContainerView];
     [self.view addSubview:self.videoTableView];
-    [self.view addSubview:self.backButton];
+    [self.view addSubview:self.videoContainerView];
     
     [self.videoContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.top.equalTo(self.view);
         make.height.mas_equalTo(211);
     }];
     [self.videoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.videoContainerView.mas_bottom).offset(2);
+        make.top.mas_equalTo(212);
         make.leading.trailing.bottom.equalTo(self.view);
-    }];
-    [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.top.mas_equalTo(18);
-        make.width.height.mas_equalTo(22);
     }];
 }
 

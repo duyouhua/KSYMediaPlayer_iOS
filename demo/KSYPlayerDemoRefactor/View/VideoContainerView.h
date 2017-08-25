@@ -10,4 +10,8 @@
 
 @interface VideoContainerView : UIView
 
+@property (nonatomic, assign, getter=isFullScreen) BOOL  fullScreen;
+
+- (instancetype)initWithFullScreenBlock:(void(^)(BOOL))fullScreenBlock;
+
 @end

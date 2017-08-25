@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface VodPlayControlView : UIView
-
+@property (weak, nonatomic) IBOutlet UIButton *pauseButton;
+@property (weak, nonatomic) IBOutlet UIButton *fullScreenButton;
 @end

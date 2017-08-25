@@ -63,6 +63,10 @@
                 <constraint firstItem="Fhd-1q-QIc" firstAttribute="centerY" secondItem="w2A-D6-zox" secondAttribute="centerY" id="rVt-VH-fr2"/>
                 <constraint firstAttribute="trailing" secondItem="B8J-MR-n7m" secondAttribute="trailing" constant="3" id="zYd-gd-S6L"/>
             </constraints>
+            <connections>
+                <outlet property="fullScreenButton" destination="B8J-MR-n7m" id="Pm2-iB-VBz"/>
+                <outlet property="pauseButton" destination="w2A-D6-zox" id="zDS-aN-lgT"/>
+            </connections>
             <point key="canvasLocation" x="-68.5" y="49.5"/>
         </view>
     </objects>
