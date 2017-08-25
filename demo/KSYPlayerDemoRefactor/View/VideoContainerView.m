@@ -30,10 +30,18 @@
 }
 
 - (void)setupUI {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(aTapEv)];
+    [self addGestureRecognizer:tap];
+    
     [self addSubview:self.backButton];
     [self addSubview:self.aMaskView];
     [self addSubview:self.playControlView];
     [self configeConstraints];
+}
+
+- (void)aTapEv {
+    self.playControlView.hidden = !self.playControlView.hidden;
+    self.aMaskView.hidden = !self.aMaskView.hidden;
 }
 
 - (VodPlayControlView *)playControlView {
@@ -69,6 +77,7 @@
         _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+        _backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
     }
     return _backButton;
 }
@@ -96,8 +105,8 @@
 
 - (void)configeConstraints {
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.top.mas_equalTo(18);
-        make.width.height.mas_equalTo(22);
+        make.leading.top.equalTo(self);
+        make.width.height.mas_equalTo(60);
     }];
     [self.aMaskView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(self);
