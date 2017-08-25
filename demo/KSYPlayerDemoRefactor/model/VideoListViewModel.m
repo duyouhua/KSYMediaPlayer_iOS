@@ -29,7 +29,7 @@
     self.listViewDataSource = [NSMutableArray new];
     for (NSInteger i = 0; i < 6; ++i) {
         VideoModel *videoModel = [[VideoModel alloc] init];
-        videoModel.vUrl = @"http://120.25.226.186:32812/resources/videos/minion_04.mp4";
+        videoModel.vUrl = @"http://lavaweb-10015286.video.myqcloud.com/ideal-pick-2.mp4";
         videoModel.vDescription = @"It's a test description";
         videoModel.vCoverImageUrl = @"";
         [_listViewDataSource addObject:videoModel];

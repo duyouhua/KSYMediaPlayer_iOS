@@ -13,9 +13,11 @@
 @interface VideoContainerView ()
 @property (nonatomic, strong) VodPlayControlView *playControlView;
 @property (nonatomic, strong) UIButton           *backButton;
-@property (nonatomic, strong) UIView             *aMaskView;
+@property (nonatomic, strong) UIView             *aBottomMaskView;
+@property (nonatomic, strong) UIView             *aTopMaskView;
 
 @property (nonatomic, copy) void(^fullScreenBlock)(BOOL isFullScreen);
+@property (nonatomic, assign) BOOL hasHideProgress;
 @end
 
 @implementation VideoContainerView
@@ -33,15 +35,41 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(aTapEv)];
     [self addGestureRecognizer:tap];
     
+    [self addSubview:self.aTopMaskView];
     [self addSubview:self.backButton];
-    [self addSubview:self.aMaskView];
+    [self addSubview:self.aBottomMaskView];
     [self addSubview:self.playControlView];
     [self configeConstraints];
+    self.aTopMaskView.hidden = YES;
 }
 
 - (void)aTapEv {
-    self.playControlView.hidden = !self.playControlView.hidden;
-    self.aMaskView.hidden = !self.aMaskView.hidden;
+    self.userInteractionEnabled = NO;
+    if (self.isFullScreen) {
+        if (self.hasHideProgress) {
+            [self configeConstraints];
+            [UIView animateWithDuration:0.2 animations:^{
+                [self layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                self.userInteractionEnabled = YES;
+                self.hasHideProgress = NO;
+            }];
+        } else {
+            [self updateConstraintsHandler];
+            [UIView animateWithDuration:0.2 animations:^{
+                [self layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                self.userInteractionEnabled = YES;
+                self.hasHideProgress = YES;
+            }];
+        }
+    } else {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.playControlView.hidden = !self.playControlView.hidden;
+            self.aBottomMaskView.hidden = !self.aBottomMaskView.hidden;
+            self.userInteractionEnabled = YES;
+        });
+    }
 }
 
 - (VodPlayControlView *)playControlView {
@@ -61,15 +89,24 @@
 - (void)fullScreenAction {
     if (self.fullScreenBlock) {
         self.fullScreenBlock(YES);
+        self.aTopMaskView.hidden = NO;
     }
 }
 
-- (UIView *)aMaskView {
-    if (!_aMaskView) {
-        _aMaskView = [[UIView alloc] init];
-        _aMaskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+- (UIView *)aBottomMaskView {
+    if (!_aBottomMaskView) {
+        _aBottomMaskView = [[UIView alloc] init];
+        _aBottomMaskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     }
-    return _aMaskView;
+    return _aBottomMaskView;
+}
+
+- (UIView *)aTopMaskView {
+    if (!_aTopMaskView) {
+        _aTopMaskView = [[UIView alloc] init];
+        _aTopMaskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    }
+    return _aTopMaskView;
 }
 
 - (UIButton *)backButton {
@@ -86,6 +123,7 @@
     if (self.isFullScreen) {
         if (self.fullScreenBlock) {
             self.fullScreenBlock(NO);
+            self.aTopMaskView.hidden = YES;
         }
     } else {
         UIViewController *controller = nil;
@@ -104,16 +142,36 @@
 }
 
 - (void)configeConstraints {
-    [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.aTopMaskView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.trailing.equalTo(self);
+        make.height.mas_equalTo(57);
+    }];
+    [self.backButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.leading.top.equalTo(self);
         make.width.height.mas_equalTo(60);
     }];
-    [self.aMaskView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.aBottomMaskView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(self);
         make.height.mas_equalTo(30);
     }];
-    [self.playControlView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.aMaskView);
+    [self.playControlView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.bottom.equalTo(self);
+        make.height.mas_equalTo(30);
+    }];
+}
+
+- (void)updateConstraintsHandler {
+    [self.aTopMaskView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_top);
+    }];
+    [self.backButton mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_top);
+    }];
+    [self.aBottomMaskView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_bottom);
+    }];
+    [self.playControlView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_bottom);
     }];
 }
 
