@@ -7,8 +7,12 @@
 //
 
 #import "PlayerTableViewCell.h"
+#import "UIImageView+WebCache.h"
+#import "VideoModel.h"
 
 @interface PlayerTableViewCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
+@property (weak, nonatomic) IBOutlet UILabel *videoTitleLab;
 
 @end
 
@@ -26,7 +30,8 @@
 }
 
 - (void)configeWithVideoModel:(VideoModel *)videoModel {
-    
+    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:videoModel.CoverURL.firstObject] placeholderImage:[UIImage imageNamed:@""]];
+    self.videoTitleLab.text = videoModel.VideoTitle;
 }
 
 @end

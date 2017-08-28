@@ -33,6 +33,11 @@
     [self fetchDatasource];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)fetchDatasource {
     NSURL *url = [NSURL URLWithString:@"https://appdemo.download.ks-cdn.com:8682/api/GetLiveUrl/2017-01-01?Option=2"];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -55,7 +60,7 @@
         make.height.mas_equalTo(197);
     }];
     [self.videoCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.headerView.mas_bottom).offset(10);
+        make.top.equalTo(self.headerView.mas_bottom).offset(5);
         make.leading.trailing.bottom.equalTo(self.view);
     }];
 }

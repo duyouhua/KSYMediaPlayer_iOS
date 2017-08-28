@@ -39,12 +39,10 @@
 }
 
 - (void)dealloc {
+    [self.player stop];
+    [self.player removeObserver:self forKeyPath:@"currentPlaybackTime"];
     [self removeObserver:self forKeyPath:@"player"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (BOOL)shouldAutorotate {
-    return NO;
 }
 
 - (void)viewDidLoad {
@@ -158,8 +156,6 @@
     }
     NSKeyValueObservingOptions opts = NSKeyValueObservingOptionNew;
     [_player addObserver:self forKeyPath:@"currentPlaybackTime" options:opts context:nil];
-    [_player addObserver:self forKeyPath:@"clientIP" options:opts context:nil];
-    [_player addObserver:self forKeyPath:@"localDNSIP" options:opts context:nil];
     self.prepared_time = (long long int)([[NSDate date] timeIntervalSince1970] * 1000);
     [_player prepareToPlay];
 }
