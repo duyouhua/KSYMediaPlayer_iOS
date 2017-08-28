@@ -25,7 +25,6 @@
 @property (nonatomic, assign) int64_t   prepared_time;
 @property (nonatomic, assign) int       fvr_costtime;
 @property (nonatomic, assign) int       far_costtime;
-@property (nonatomic, copy)   NSString *serverIp;
 @end
 
 @implementation PlayerViewController
@@ -97,6 +96,16 @@
     _player.controlStyle = MPMovieControlStyleNone;
     [self.videoContainerView addSubview: _player.view];
     [self.videoContainerView sendSubviewToBack:_player.view];
+    __weak typeof(self) weakSelf = self;
+    //VCPlayHandlerState
+    self.videoContainerView.playStateBlock = ^(VCPlayHandlerState state) {
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (state == VCPlayHandlerStatePause) {
+            [strongSelf.player pause];
+        } else if (state == VCPlayHandlerStatePlay) {
+            [strongSelf.player play];
+        }
+    };
     [_player.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.videoContainerView);
     }];
@@ -175,18 +184,15 @@
 
 -(void)handlePlayerNotify:(NSNotification*)notify
 {
-    /*
     if (!_player) {
         return;
     }
     if (MPMediaPlaybackIsPreparedToPlayDidChangeNotification ==  notify.name) {
-        progressView.totalTimeInSeconds = _player.duration;
+        [self.videoContainerView updateTotalPlayTime:_player.duration];
         if(_player.shouldAutoplay == NO)
             [_player play];
-        serverIp = [_player serverAddress];
-        NSLog(@"KSYPlayerVC: %@ -- ip:%@", [[_player contentURL] absoluteString], serverIp);
-        reloading = NO;
     }
+    /*
     if (MPMoviePlayerPlaybackStateDidChangeNotification ==  notify.name) {
         NSLog(@"------------------------");
         NSLog(@"player playback state: %ld", (long)_player.playbackState);
@@ -281,36 +287,35 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    /*
-    if([keyPath isEqual:@"currentPlaybackTime"])
-    {
-        progressView.playProgress = _player.currentPlaybackTime / _player.duration;
+    
+    if([keyPath isEqual:@"currentPlaybackTime"]) {
+        [_videoContainerView updatePlayedTime:_player.currentPlaybackTime];
     }
-    else if([keyPath isEqual:@"clientIP"])
-    {
-        NSLog(@"client IP is %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
-    }
-    else if([keyPath isEqual:@"localDNSIP"])
-    {
-        NSLog(@"local DNS IP is %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
-    }
-    else if ([keyPath isEqualToString:@"player"]) {
-        if (_player) {
-            progressView.hidden = NO;
-            __weak typeof(_player) weakPlayer = _player;
-            progressView.dragingSliderCallback = ^(float progress){
-                typeof(weakPlayer) strongPlayer = weakPlayer;
-                double seekPos = progress * strongPlayer.duration;
-                //strongPlayer.currentPlaybackTime = progress * strongPlayer.duration;
-                //使用currentPlaybackTime设置为依靠关键帧定位
-                //使用seekTo:accurate并且将accurate设置为YES时为精确定位
-                [strongPlayer seekTo:seekPos accurate:YES];
-            };
-        } else {
-            progressView.hidden = YES;
-        }
-    }
-     */
+//    else if([keyPath isEqual:@"clientIP"])
+//    {
+//        NSLog(@"client IP is %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
+//    }
+//    else if([keyPath isEqual:@"localDNSIP"])
+//    {
+//        NSLog(@"local DNS IP is %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
+//    }
+//    else if ([keyPath isEqualToString:@"player"]) {
+//        if (_player) {
+//            progressView.hidden = NO;
+//            __weak typeof(_player) weakPlayer = _player;
+//            progressView.dragingSliderCallback = ^(float progress){
+//                typeof(weakPlayer) strongPlayer = weakPlayer;
+//                double seekPos = progress * strongPlayer.duration;
+//                //strongPlayer.currentPlaybackTime = progress * strongPlayer.duration;
+//                //使用currentPlaybackTime设置为依靠关键帧定位
+//                //使用seekTo:accurate并且将accurate设置为YES时为精确定位
+//                [strongPlayer seekTo:seekPos accurate:YES];
+//            };
+//        } else {
+//            progressView.hidden = YES;
+//        }
+//    }
+    
 }
 
 @end

@@ -11,4 +11,6 @@
 @interface VodPlayControlView : UIView
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 @property (weak, nonatomic) IBOutlet UIButton *fullScreenButton;
+@property (weak, nonatomic) IBOutlet UILabel  *playedTimeLab;
+@property (weak, nonatomic) IBOutlet UILabel  *totalPlayTimeLab;
 @end

@@ -18,18 +18,28 @@
 
 @property (nonatomic, copy) void(^fullScreenBlock)(BOOL isFullScreen);
 @property (nonatomic, assign) BOOL hasHideProgress;
+@property (nonatomic, assign) VCPlayHandlerState playState;
+
+@property (nonatomic, assign) float playedTime;
 @end
 
 @implementation VideoContainerView
 
-- (instancetype)initWithFullScreenBlock:(void(^)(BOOL))fullScreenBlock {
+- (instancetype)initWithFullScreenBlock:(void(^)(BOOL))fullScreenBlock
+{
     if (self = [super init]) {
         _fullScreenBlock = fullScreenBlock;
         _fullScreen = NO;
+        _totalPlayTime = 0;
+        _playedTime = 0;
+        _playState = VCPlayHandlerStatePause;
         [self setupUI];
     }
     return self;
 }
+
+#pragma mark --
+#pragma mark -- UI metohd
 
 - (void)setupUI {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(aTapEv)];
@@ -41,35 +51,8 @@
     [self addSubview:self.playControlView];
     [self configeConstraints];
     self.aTopMaskView.hidden = YES;
-}
-
-- (void)aTapEv {
-    self.userInteractionEnabled = NO;
-    if (self.isFullScreen) {
-        if (self.hasHideProgress) {
-            [self configeConstraints];
-            [UIView animateWithDuration:0.2 animations:^{
-                [self layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                self.userInteractionEnabled = YES;
-                self.hasHideProgress = NO;
-            }];
-        } else {
-            [self updateConstraintsHandler];
-            [UIView animateWithDuration:0.2 animations:^{
-                [self layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                self.userInteractionEnabled = YES;
-                self.hasHideProgress = YES;
-            }];
-        }
-    } else {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.playControlView.hidden = !self.playControlView.hidden;
-            self.aBottomMaskView.hidden = !self.aBottomMaskView.hidden;
-            self.userInteractionEnabled = YES;
-        });
-    }
+    self.playControlView.hidden = YES;
+    self.aBottomMaskView.hidden = YES;
 }
 
 - (VodPlayControlView *)playControlView {
@@ -77,20 +60,9 @@
         _playControlView = [[NSBundle mainBundle] loadNibNamed:@"VodPlayControlView" owner:self options:nil].firstObject;
         _playControlView.backgroundColor = [UIColor clearColor];
         [_playControlView.fullScreenButton addTarget:self action:@selector(fullScreenAction) forControlEvents:UIControlEventTouchUpInside];
-        [_playControlView.pauseButton addTarget:self action:@selector(pauseAction) forControlEvents:UIControlEventTouchUpInside];
+        [_playControlView.pauseButton addTarget:self action:@selector(playStateHandler) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playControlView;
-}
-
-- (void)pauseAction {
-    
-}
-
-- (void)fullScreenAction {
-    if (self.fullScreenBlock) {
-        self.fullScreenBlock(YES);
-        self.aTopMaskView.hidden = NO;
-    }
 }
 
 - (UIView *)aBottomMaskView {
@@ -117,28 +89,6 @@
         _backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
     }
     return _backButton;
-}
-
-- (void)backAction {
-    if (self.isFullScreen) {
-        if (self.fullScreenBlock) {
-            self.fullScreenBlock(NO);
-            self.aTopMaskView.hidden = YES;
-        }
-    } else {
-        UIViewController *controller = nil;
-        for (UIView *view = self; view; view = view.superview) {
-            UIResponder *nextResponder = [view nextResponder];
-            if ([nextResponder isKindOfClass:[UIViewController class]]) {
-                controller = (UIViewController *)nextResponder;
-            }
-        }
-        if ([controller isKindOfClass:[UINavigationController class]]) {
-            [(UINavigationController *)controller popViewControllerAnimated:YES];
-        } else {
-            [controller.navigationController popViewControllerAnimated:YES];
-        }
-    }
 }
 
 - (void)configeConstraints {
@@ -173,6 +123,96 @@
     [self.playControlView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_bottom);
     }];
+}
+
+#pragma mark --
+#pragma mark -- private handler method
+
+- (void)playStateHandler {
+    if (self.playStateBlock) {
+        self.playStateBlock(_playState);
+        if (_playState == VCPlayHandlerStatePause) {
+            self.playState = VCPlayHandlerStatePlay;
+        } else {
+            self.playState = VCPlayHandlerStatePause;
+        }
+    }
+}
+
+- (void)fullScreenAction {
+    if (self.fullScreenBlock) {
+        self.fullScreenBlock(YES);
+        self.aTopMaskView.hidden = NO;
+    }
+}
+
+- (void)aTapEv {
+    self.userInteractionEnabled = NO;
+    if (self.isFullScreen) {
+        if (self.hasHideProgress) {
+            [self configeConstraints];
+            [UIView animateWithDuration:0.2 animations:^{
+                [self layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                self.userInteractionEnabled = YES;
+                self.hasHideProgress = NO;
+            }];
+        } else {
+            [self updateConstraintsHandler];
+            [UIView animateWithDuration:0.2 animations:^{
+                [self layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                self.userInteractionEnabled = YES;
+                self.hasHideProgress = YES;
+            }];
+        }
+    } else {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.playControlView.hidden = !self.playControlView.hidden;
+            self.aBottomMaskView.hidden = !self.aBottomMaskView.hidden;
+            self.userInteractionEnabled = YES;
+        });
+    }
+}
+
+- (void)backAction {
+    if (self.isFullScreen) {
+        if (self.fullScreenBlock) {
+            self.fullScreenBlock(NO);
+            self.aTopMaskView.hidden = YES;
+        }
+    } else {
+        UIViewController *controller = nil;
+        for (UIView *view = self; view; view = view.superview) {
+            UIResponder *nextResponder = [view nextResponder];
+            if ([nextResponder isKindOfClass:[UIViewController class]]) {
+                controller = (UIViewController *)nextResponder;
+            }
+        }
+        if ([controller isKindOfClass:[UINavigationController class]]) {
+            [(UINavigationController *)controller popViewControllerAnimated:YES];
+        } else {
+            [controller.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+
+- (NSString *)convertToMinutes:(NSTimeInterval)seconds {
+    NSString *timeStr = [NSString stringWithFormat:@"%02d:%02d", (int)seconds / 60, (int)seconds % 60];
+    return timeStr;
+}
+
+#pragma mark --
+#pragma mark -- public method
+
+- (void)updatePlayedTime:(NSTimeInterval)playedTime {
+    self.playControlView.playedTimeLab.text = [self convertToMinutes:playedTime];
+}
+
+- (void)updateTotalPlayTime:(NSTimeInterval)totalPlayTime {
+    self.playControlView.hidden = NO;
+    self.aBottomMaskView.hidden = NO;
+    self.playControlView.totalPlayTimeLab.text = [self convertToMinutes:totalPlayTime];
 }
 
 @end

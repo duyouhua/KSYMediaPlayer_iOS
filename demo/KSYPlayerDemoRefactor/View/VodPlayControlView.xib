@@ -32,13 +32,13 @@
                     </constraints>
                     <state key="normal" image="switchTofullScreen"/>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18:20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI0-Kd-psR">
-                    <rect key="frame" x="295" y="328" width="27" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI0-Kd-psR">
+                    <rect key="frame" x="295" y="328" width="30" height="12"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="09:09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7h-Fz-8kQ">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7h-Fz-8kQ">
                     <rect key="frame" x="59" y="328" width="29" height="12"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,15 +59,17 @@
                 <constraint firstItem="gI0-Kd-psR" firstAttribute="leading" secondItem="Fhd-1q-QIc" secondAttribute="trailing" constant="8" symbolic="YES" id="R4q-6C-nKq"/>
                 <constraint firstItem="x7h-Fz-8kQ" firstAttribute="leading" secondItem="w2A-D6-zox" secondAttribute="trailing" constant="6" id="ayT-wL-KYt"/>
                 <constraint firstItem="Fhd-1q-QIc" firstAttribute="leading" secondItem="w2A-D6-zox" secondAttribute="trailing" constant="43" id="hJR-UT-S7j"/>
-                <constraint firstItem="B8J-MR-n7m" firstAttribute="leading" secondItem="gI0-Kd-psR" secondAttribute="trailing" constant="10" id="lwT-NN-PtZ"/>
+                <constraint firstItem="B8J-MR-n7m" firstAttribute="leading" secondItem="gI0-Kd-psR" secondAttribute="trailing" constant="7" id="lwT-NN-PtZ"/>
                 <constraint firstItem="Fhd-1q-QIc" firstAttribute="centerY" secondItem="w2A-D6-zox" secondAttribute="centerY" id="rVt-VH-fr2"/>
                 <constraint firstAttribute="trailing" secondItem="B8J-MR-n7m" secondAttribute="trailing" constant="3" id="zYd-gd-S6L"/>
             </constraints>
             <connections>
                 <outlet property="fullScreenButton" destination="B8J-MR-n7m" id="Pm2-iB-VBz"/>
                 <outlet property="pauseButton" destination="w2A-D6-zox" id="zDS-aN-lgT"/>
+                <outlet property="playedTimeLab" destination="x7h-Fz-8kQ" id="piL-hT-f3C"/>
+                <outlet property="totalPlayTimeLab" destination="gI0-Kd-psR" id="BO3-Iv-D6v"/>
             </connections>
-            <point key="canvasLocation" x="-68.5" y="49.5"/>
+            <point key="canvasLocation" x="-115" y="50"/>
         </view>
     </objects>
     <resources>
