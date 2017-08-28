@@ -16,6 +16,7 @@
 #import "Masonry.h"
 #import "PlayerTableViewCell.h"
 #import "Constant.h"
+#import "AppDelegate.h"
 
 @interface PlayerViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) PlayerViewModel          *playerViewModel;
@@ -42,12 +43,35 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationChange:)name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     [self addObserver:self forKeyPath:@"player" options:NSKeyValueObservingOptionNew context:nil];
     [self setupUI];
     [self setupPlayer];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.allowRotation = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.allowRotation = NO;
+}
+
+- (void)statusBarOrientationChange:(NSNotification *)notification {
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    BOOL fullScreen = (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft);
+    [self.playerViewModel fullScreenHandlerForView:self.videoContainerView isFullScreen:fullScreen];
 }
 
 - (VideoContainerView *)videoContainerView {
