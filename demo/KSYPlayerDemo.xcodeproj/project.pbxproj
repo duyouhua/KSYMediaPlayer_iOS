@@ -99,6 +99,15 @@
 		F0E6FDB41F4E7D9100BA549A /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FDB31F4E7D9100BA549A /* SettingViewController.m */; };
 		F0E6FDB71F4EC72F00BA549A /* VodPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FDB61F4EC72F00BA549A /* VodPlayControlView.m */; };
 		F0E6FDB91F4EC74300BA549A /* VodPlayControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0E6FDB81F4EC74300BA549A /* VodPlayControlView.xib */; };
+		F0E6FEDD1F53CB3800BA549A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F0E6FEC71F53CB3800BA549A /* Info.plist */; };
+		F0E6FEDE1F53CB3800BA549A /* JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FECA1F53CB3800BA549A /* JSONModel.m */; };
+		F0E6FEDF1F53CB3800BA549A /* JSONModelClassProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FECC1F53CB3800BA549A /* JSONModelClassProperty.m */; };
+		F0E6FEE01F53CB3800BA549A /* JSONModelError.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FECE1F53CB3800BA549A /* JSONModelError.m */; };
+		F0E6FEE11F53CB3800BA549A /* JSONAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FED31F53CB3800BA549A /* JSONAPI.m */; };
+		F0E6FEE21F53CB3800BA549A /* JSONHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FED51F53CB3800BA549A /* JSONHTTPClient.m */; };
+		F0E6FEE31F53CB3800BA549A /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FED71F53CB3800BA549A /* JSONModel+networking.m */; };
+		F0E6FEE41F53CB3800BA549A /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FEDA1F53CB3800BA549A /* JSONKeyMapper.m */; };
+		F0E6FEE51F53CB3800BA549A /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E6FEDC1F53CB3800BA549A /* JSONValueTransformer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -291,6 +300,25 @@
 		F0E6FDB51F4EC72F00BA549A /* VodPlayControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VodPlayControlView.h; sourceTree = "<group>"; };
 		F0E6FDB61F4EC72F00BA549A /* VodPlayControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VodPlayControlView.m; sourceTree = "<group>"; };
 		F0E6FDB81F4EC74300BA549A /* VodPlayControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VodPlayControlView.xib; sourceTree = "<group>"; };
+		F0E6FEC71F53CB3800BA549A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F0E6FEC91F53CB3800BA549A /* JSONModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModel.h; sourceTree = "<group>"; };
+		F0E6FECA1F53CB3800BA549A /* JSONModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModel.m; sourceTree = "<group>"; };
+		F0E6FECB1F53CB3800BA549A /* JSONModelClassProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelClassProperty.h; sourceTree = "<group>"; };
+		F0E6FECC1F53CB3800BA549A /* JSONModelClassProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModelClassProperty.m; sourceTree = "<group>"; };
+		F0E6FECD1F53CB3800BA549A /* JSONModelError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelError.h; sourceTree = "<group>"; };
+		F0E6FECE1F53CB3800BA549A /* JSONModelError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModelError.m; sourceTree = "<group>"; };
+		F0E6FECF1F53CB3800BA549A /* JSONModel.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = JSONModel.modulemap; sourceTree = "<group>"; };
+		F0E6FED01F53CB3800BA549A /* JSONModelLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelLib.h; sourceTree = "<group>"; };
+		F0E6FED21F53CB3800BA549A /* JSONAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPI.h; sourceTree = "<group>"; };
+		F0E6FED31F53CB3800BA549A /* JSONAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPI.m; sourceTree = "<group>"; };
+		F0E6FED41F53CB3800BA549A /* JSONHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONHTTPClient.h; sourceTree = "<group>"; };
+		F0E6FED51F53CB3800BA549A /* JSONHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONHTTPClient.m; sourceTree = "<group>"; };
+		F0E6FED61F53CB3800BA549A /* JSONModel+networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSONModel+networking.h"; sourceTree = "<group>"; };
+		F0E6FED71F53CB3800BA549A /* JSONModel+networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSONModel+networking.m"; sourceTree = "<group>"; };
+		F0E6FED91F53CB3800BA549A /* JSONKeyMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKeyMapper.h; sourceTree = "<group>"; };
+		F0E6FEDA1F53CB3800BA549A /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
+		F0E6FEDB1F53CB3800BA549A /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
+		F0E6FEDC1F53CB3800BA549A /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -536,6 +564,7 @@
 		F07DE4751F4D589F00370C54 /* third */ = {
 			isa = PBXGroup;
 			children = (
+				F0E6FEC61F53CB3800BA549A /* JSONModel */,
 				F07DE4AE1F4D703F00370C54 /* SDWebImage */,
 				F07DE4761F4D589F00370C54 /* Masonry */,
 			);
@@ -638,6 +667,56 @@
 			path = FLAnimatedImage;
 			sourceTree = "<group>";
 		};
+		F0E6FEC61F53CB3800BA549A /* JSONModel */ = {
+			isa = PBXGroup;
+			children = (
+				F0E6FEC71F53CB3800BA549A /* Info.plist */,
+				F0E6FEC81F53CB3800BA549A /* JSONModel */,
+				F0E6FECF1F53CB3800BA549A /* JSONModel.modulemap */,
+				F0E6FED01F53CB3800BA549A /* JSONModelLib.h */,
+				F0E6FED11F53CB3800BA549A /* JSONModelNetworking */,
+				F0E6FED81F53CB3800BA549A /* JSONModelTransformations */,
+			);
+			path = JSONModel;
+			sourceTree = "<group>";
+		};
+		F0E6FEC81F53CB3800BA549A /* JSONModel */ = {
+			isa = PBXGroup;
+			children = (
+				F0E6FEC91F53CB3800BA549A /* JSONModel.h */,
+				F0E6FECA1F53CB3800BA549A /* JSONModel.m */,
+				F0E6FECB1F53CB3800BA549A /* JSONModelClassProperty.h */,
+				F0E6FECC1F53CB3800BA549A /* JSONModelClassProperty.m */,
+				F0E6FECD1F53CB3800BA549A /* JSONModelError.h */,
+				F0E6FECE1F53CB3800BA549A /* JSONModelError.m */,
+			);
+			path = JSONModel;
+			sourceTree = "<group>";
+		};
+		F0E6FED11F53CB3800BA549A /* JSONModelNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				F0E6FED21F53CB3800BA549A /* JSONAPI.h */,
+				F0E6FED31F53CB3800BA549A /* JSONAPI.m */,
+				F0E6FED41F53CB3800BA549A /* JSONHTTPClient.h */,
+				F0E6FED51F53CB3800BA549A /* JSONHTTPClient.m */,
+				F0E6FED61F53CB3800BA549A /* JSONModel+networking.h */,
+				F0E6FED71F53CB3800BA549A /* JSONModel+networking.m */,
+			);
+			path = JSONModelNetworking;
+			sourceTree = "<group>";
+		};
+		F0E6FED81F53CB3800BA549A /* JSONModelTransformations */ = {
+			isa = PBXGroup;
+			children = (
+				F0E6FED91F53CB3800BA549A /* JSONKeyMapper.h */,
+				F0E6FEDA1F53CB3800BA549A /* JSONKeyMapper.m */,
+				F0E6FEDB1F53CB3800BA549A /* JSONValueTransformer.h */,
+				F0E6FEDC1F53CB3800BA549A /* JSONValueTransformer.m */,
+			);
+			path = JSONModelTransformations;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -706,6 +785,7 @@
 				F0E6FDB91F4EC74300BA549A /* VodPlayControlView.xib in Resources */,
 				74B9ED681C158675003149E9 /* Assets.xcassets in Resources */,
 				F0E6FDA61F4DAB6000BA549A /* VideoContainerView.xib in Resources */,
+				F0E6FEDD1F53CB3800BA549A /* Info.plist in Resources */,
 				F07DE4F21F4D999F00370C54 /* VideoCollectionHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,6 +817,7 @@
 				F07DE4AC1F4D6C3300370C54 /* VideoCollectionViewCell.m in Sources */,
 				582CC6021F30729300DFED24 /* KSYPlayerAudioView.m in Sources */,
 				F07DE4E41F4D703F00370C54 /* SDWebImagePrefetcher.m in Sources */,
+				F0E6FEE21F53CB3800BA549A /* JSONHTTPClient.m in Sources */,
 				F07DE4461F4D44E500370C54 /* VideoContainerView.m in Sources */,
 				587CEF481EFBA7BC0018F226 /* KSYSimplePlayVC.m in Sources */,
 				F07DE49A1F4D589F00370C54 /* View+MASAdditions.m in Sources */,
@@ -753,7 +834,9 @@
 				588141EB1ECB0F2F0022A360 /* KSYFloatVC.m in Sources */,
 				F07DE4DF1F4D703F00370C54 /* SDWebImageCompat.m in Sources */,
 				F0E6FDB41F4E7D9100BA549A /* SettingViewController.m in Sources */,
+				F0E6FEE01F53CB3800BA549A /* JSONModelError.m in Sources */,
 				95B4A4151CC085BE00CB6804 /* QRViewController.m in Sources */,
+				F0E6FEE51F53CB3800BA549A /* JSONValueTransformer.m in Sources */,
 				F0E6FDB71F4EC72F00BA549A /* VodPlayControlView.m in Sources */,
 				588141F21ECB0F2F0022A360 /* KSYURLTableVC.m in Sources */,
 				F07DE4F51F4D99D500370C54 /* VideoCollectionHeaderView.m in Sources */,
@@ -764,13 +847,16 @@
 				E328B4D81CCE087400BD31FC /* KSYDBCreater.m in Sources */,
 				582096031EDED32600C38D0F /* KSYAVWriter.m in Sources */,
 				588141FD1ECB0F690022A360 /* KSYNameSlider.m in Sources */,
+				F0E6FEE31F53CB3800BA549A /* JSONModel+networking.m in Sources */,
 				F07DE4931F4D589F00370C54 /* MASConstraint.m in Sources */,
 				588141FF1ECB0F690022A360 /* KSYUIView.m in Sources */,
+				F0E6FEDE1F53CB3800BA549A /* JSONModel.m in Sources */,
 				F07DE4391F4C593700370C54 /* VideoModel.m in Sources */,
 				F0E6FDAA1F4DACF300BA549A /* PlayerTableViewCell.m in Sources */,
 				588141FC1ECB0F690022A360 /* KSYFileSelector.m in Sources */,
 				F07DE4181F4C20D400370C54 /* VodViewController.m in Sources */,
 				F07DE49B1F4D589F00370C54 /* ViewController+MASAdditions.m in Sources */,
+				F0E6FEE41F53CB3800BA549A /* JSONKeyMapper.m in Sources */,
 				F07DE4EC1F4D703F00370C54 /* UIView+WebCacheOperation.m in Sources */,
 				95B4A4141CC085BE00CB6804 /* KSYSQLiteManager.m in Sources */,
 				F07DE4EB1F4D703F00370C54 /* UIView+WebCache.m in Sources */,
@@ -786,7 +872,9 @@
 				588141F01ECB0F2F0022A360 /* KSYProberVC.m in Sources */,
 				F07DE4951F4D589F00370C54 /* MASLayoutConstraint.m in Sources */,
 				F07DE4E31F4D703F00370C54 /* SDWebImageManager.m in Sources */,
+				F0E6FEDF1F53CB3800BA549A /* JSONModelClassProperty.m in Sources */,
 				F07DE4DD1F4D703F00370C54 /* SDImageCache.m in Sources */,
+				F0E6FEE11F53CB3800BA549A /* JSONAPI.m in Sources */,
 				F0E6FDB11F4E7BBA00BA549A /* TableViewController.m in Sources */,
 				F07DE4431F4D216E00370C54 /* SettingDataHandler.m in Sources */,
 				588141EF1ECB0F2F0022A360 /* KSYPlayerVC.m in Sources */,

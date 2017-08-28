@@ -41,6 +41,10 @@
                 <constraint firstAttribute="bottom" secondItem="Wah-3s-SGD" secondAttribute="bottom" constant="2" id="yjK-La-7Vb"/>
             </constraints>
             <size key="customSize" width="258" height="192"/>
+            <connections>
+                <outlet property="coverImageView" destination="dOy-qz-bHR" id="Oq7-vh-teO"/>
+                <outlet property="descriptionLab" destination="Wah-3s-SGD" id="CRG-vV-60y"/>
+            </connections>
             <point key="canvasLocation" x="-439" y="-33"/>
         </collectionViewCell>
     </objects>

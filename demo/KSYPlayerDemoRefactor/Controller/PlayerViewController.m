@@ -91,7 +91,7 @@
 
 - (void)setupPlayer {
     //初始化播放器并设置播放地址
-    self.player = [[KSYMoviePlayerController alloc] initWithContentURL: [NSURL URLWithString:_playerViewModel.playingVideoModel.vUrl] fileList:nil sharegroup:nil];
+    self.player = [[KSYMoviePlayerController alloc] initWithContentURL: [NSURL URLWithString:_playerViewModel.playingVideoModel.PlayURL.firstObject] fileList:nil sharegroup:nil];
     [self setupObservers:_player];
     _player.controlStyle = MPMovieControlStyleNone;
     [self.videoContainerView addSubview: _player.view];

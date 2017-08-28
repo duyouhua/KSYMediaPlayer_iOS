@@ -34,9 +34,16 @@
 }
 
 - (void)fetchDatasource {
-    self.videoListViewModel = [[VideoListViewModel alloc] initForTest];
-    [self.headerView configeVideoModel:self.videoListViewModel.listViewDataSource.firstObject];
-    [self.videoCollectionView reloadData];
+    NSURL *url = [NSURL URLWithString:@"https://appdemo.download.ks-cdn.com:8682/api/GetLiveUrl/2017-01-01?Option=2"];
+    NSURLSession *session = [NSURLSession sharedSession];
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.videoListViewModel = [[VideoListViewModel alloc] initWithJsonResponseData:data];
+        [strongSelf.videoCollectionView reloadData];
+        [strongSelf.headerView configeVideoModel:self.videoListViewModel.listViewDataSource.firstObject];
+    }];
+    [task resume];
 }
 
 - (void)setupUI {

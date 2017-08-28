@@ -10,4 +10,14 @@
 
 @implementation VideoModel
 
+- (NSString *)VideoTitle {
+    return [_VideoTitle stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
+@end
+
+@implementation VideoModelResponseObj
+@end
+
+@implementation VideoModelData
 @end

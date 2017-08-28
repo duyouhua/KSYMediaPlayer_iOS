@@ -24,8 +24,8 @@
 }
 
 - (void)configeVideoModel:(VideoModel *)videoModel {
-    self.descriptionLab.text = videoModel.vDescription;
-    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:videoModel.vUrl] placeholderImage:[UIImage imageNamed:@""]];
+    self.descriptionLab.text = videoModel.VideoTitle;
+    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:videoModel.CoverURL.firstObject] placeholderImage:[UIImage imageNamed:@""]];
 }
 
 @end

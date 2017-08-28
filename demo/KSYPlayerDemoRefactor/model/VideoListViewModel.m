@@ -11,29 +11,18 @@
 
 @implementation VideoListViewModel
 
-- (instancetype)initWithListDataSource:(NSMutableArray<VideoModel*> *)listViewDataSource {
+- (instancetype)initWithJsonResponseData:(NSData *)data {
     if (self = [super init]) {
-        _listViewDataSource = listViewDataSource;
+        NSError *error;
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] ;
+        VideoModelData *modelData = [[VideoModelData alloc] initWithString:jsonString error:&error];
+        if (!error) {
+            if ([modelData.Data.RetMsg isEqualToString:@"success"]) {
+                self.listViewDataSource = [[NSMutableArray alloc] initWithArray:modelData.Data.Detail];
+            }
+        }
     }
     return self;
-}
-
-- (instancetype)initForTest {
-    if (self = [super init]) {
-        [self testDataHandler];
-    }
-    return self;
-}
-
-- (void)testDataHandler {
-    self.listViewDataSource = [NSMutableArray new];
-    for (NSInteger i = 0; i < 6; ++i) {
-        VideoModel *videoModel = [[VideoModel alloc] init];
-        videoModel.vUrl = @"http://lavaweb-10015286.video.myqcloud.com/ideal-pick-2.mp4";
-        videoModel.vDescription = @"It's a test description";
-        videoModel.vCoverImageUrl = @"";
-        [_listViewDataSource addObject:videoModel];
-    }
 }
 
 @end

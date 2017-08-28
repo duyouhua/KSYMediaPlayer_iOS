@@ -7,13 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONModel.h"
 
-@interface VideoModel : NSObject
+@interface VideoModel : JSONModel
+@property (nonatomic, copy) NSString *VideoID;
+@property (nonatomic, copy) NSString *VideoTitle;
+@property (nonatomic, copy) NSArray<NSString*> *PlayURL;
+@property (nonatomic, copy) NSArray<NSString*> *CoverURL;
+@end
 
-@property (nonatomic, copy)   NSString *vDescription;
+@protocol VideoModel;
+@interface VideoModelResponseObj : JSONModel
+@property (nonatomic, assign) NSInteger  RetCode;
+@property (nonatomic, copy)   NSString  *RetMsg;
+@property (nonatomic, strong) NSArray<VideoModel> *Detail;
+@end
 
-@property (nonatomic, copy)   NSString *vCoverImageUrl;
 
-@property (nonatomic, copy)   NSString *vUrl;
-
+@interface VideoModelData : JSONModel
+@property (nonatomic, strong) VideoModelResponseObj *Data;
 @end

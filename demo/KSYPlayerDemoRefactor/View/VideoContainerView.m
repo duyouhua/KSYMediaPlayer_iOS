@@ -140,8 +140,10 @@
         self.playStateBlock(_playState);
         if (_playState == VCPlayHandlerStatePause) {
             self.playState = VCPlayHandlerStatePlay;
+            self.playControlView.pauseButton.selected = YES;
         } else {
             self.playState = VCPlayHandlerStatePause;
+            self.playControlView.pauseButton.selected = NO;
         }
     }
 }

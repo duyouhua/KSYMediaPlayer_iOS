@@ -14,8 +14,6 @@
 
 @property (nonatomic, strong) NSMutableArray<VideoModel*> *listViewDataSource;
 
-- (instancetype)initWithListDataSource:(NSMutableArray<VideoModel*> *)listViewDataSource;
-
-- (instancetype)initForTest;
+- (instancetype)initWithJsonResponseData:(NSData *)data;
 
 @end
