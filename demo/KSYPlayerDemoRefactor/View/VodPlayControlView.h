@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *fullScreenButton;
 @property (weak, nonatomic) IBOutlet UILabel  *playedTimeLab;
 @property (weak, nonatomic) IBOutlet UILabel  *totalPlayTimeLab;
+@property (weak, nonatomic) IBOutlet UISlider *playSlider;
 @end

@@ -106,6 +106,11 @@
             [strongSelf.player play];
         }
     };
+    self.videoContainerView.dragSliderBlock = ^(float progress){
+        typeof(weakSelf) strongSelf = weakSelf;
+        double seekPos = progress * strongSelf.player.duration;
+        [strongSelf.player seekTo:seekPos accurate:YES];
+    };
     [_player.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.videoContainerView);
     }];
@@ -299,23 +304,13 @@
 //    {
 //        NSLog(@"local DNS IP is %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
 //    }
-//    else if ([keyPath isEqualToString:@"player"]) {
-//        if (_player) {
-//            progressView.hidden = NO;
-//            __weak typeof(_player) weakPlayer = _player;
-//            progressView.dragingSliderCallback = ^(float progress){
-//                typeof(weakPlayer) strongPlayer = weakPlayer;
-//                double seekPos = progress * strongPlayer.duration;
-//                //strongPlayer.currentPlaybackTime = progress * strongPlayer.duration;
-//                //使用currentPlaybackTime设置为依靠关键帧定位
-//                //使用seekTo:accurate并且将accurate设置为YES时为精确定位
-//                [strongPlayer seekTo:seekPos accurate:YES];
-//            };
-//        } else {
-//            progressView.hidden = YES;
-//        }
-//    }
-    
+    else if ([keyPath isEqualToString:@"player"]) {
+        if (_player) {
+            
+        } else {
+            
+        }
+    }
 }
 
 @end

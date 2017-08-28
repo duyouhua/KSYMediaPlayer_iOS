@@ -16,11 +16,11 @@
 @property (nonatomic, strong) UIView             *aBottomMaskView;
 @property (nonatomic, strong) UIView             *aTopMaskView;
 
-@property (nonatomic, copy) void(^fullScreenBlock)(BOOL isFullScreen);
+@property (nonatomic, copy)   void(^fullScreenBlock)(BOOL isFullScreen);
 @property (nonatomic, assign) BOOL hasHideProgress;
 @property (nonatomic, assign) VCPlayHandlerState playState;
 
-@property (nonatomic, assign) float playedTime;
+@property (nonatomic, assign) NSTimeInterval playedTime;
 @end
 
 @implementation VideoContainerView
@@ -61,8 +61,15 @@
         _playControlView.backgroundColor = [UIColor clearColor];
         [_playControlView.fullScreenButton addTarget:self action:@selector(fullScreenAction) forControlEvents:UIControlEventTouchUpInside];
         [_playControlView.pauseButton addTarget:self action:@selector(playStateHandler) forControlEvents:UIControlEventTouchUpInside];
+        [_playControlView.playSlider addTarget:self action:@selector(sliderValueChangedHandler) forControlEvents:UIControlEventValueChanged];
     }
     return _playControlView;
+}
+
+- (void)sliderValueChangedHandler {
+    if (self.dragSliderBlock) {
+        self.dragSliderBlock(self.playControlView.playSlider.value);
+    }
 }
 
 - (UIView *)aBottomMaskView {
@@ -207,9 +214,15 @@
 
 - (void)updatePlayedTime:(NSTimeInterval)playedTime {
     self.playControlView.playedTimeLab.text = [self convertToMinutes:playedTime];
+    float sliderValue = 0;
+    if (self.totalPlayTime > 0) {
+        sliderValue = playedTime / self.totalPlayTime;
+    }
+    [self.playControlView.playSlider setValue:sliderValue];
 }
 
 - (void)updateTotalPlayTime:(NSTimeInterval)totalPlayTime {
+    self.totalPlayTime = totalPlayTime;
     self.playControlView.hidden = NO;
     self.aBottomMaskView.hidden = NO;
     self.playControlView.totalPlayTimeLab.text = [self convertToMinutes:totalPlayTime];

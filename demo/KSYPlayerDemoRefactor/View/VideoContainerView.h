@@ -17,9 +17,11 @@ typedef NS_ENUM(NSInteger, VCPlayHandlerState) {
 
 @property (nonatomic, assign, getter=isFullScreen) BOOL  fullScreen;
 
-@property (nonatomic, assign) float totalPlayTime;
+@property (nonatomic, assign) NSTimeInterval totalPlayTime;
 
 @property (nonatomic, copy) void(^playStateBlock)(VCPlayHandlerState);
+
+@property (nonatomic, copy) void(^dragSliderBlock)(float progress);
 
 - (instancetype)initWithFullScreenBlock:(void(^)(BOOL))fullScreenBlock;
 
