@@ -62,6 +62,9 @@
         [_playControlView.fullScreenButton addTarget:self action:@selector(fullScreenAction) forControlEvents:UIControlEventTouchUpInside];
         [_playControlView.pauseButton addTarget:self action:@selector(playStateHandler) forControlEvents:UIControlEventTouchUpInside];
         [_playControlView.playSlider addTarget:self action:@selector(sliderValueChangedHandler) forControlEvents:UIControlEventValueChanged];
+        for (UIView *aView in _playControlView.subviews) {
+            [aView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        }
     }
     return _playControlView;
 }
@@ -209,6 +212,11 @@
 - (NSString *)convertToMinutes:(NSTimeInterval)seconds {
     NSString *timeStr = [NSString stringWithFormat:@"%02d:%02d", (int)seconds / 60, (int)seconds % 60];
     return timeStr;
+}
+
+- (void)setFullScreen:(BOOL)fullScreen {
+    _fullScreen = fullScreen;
+    [self.playControlView screenRotateHandler:fullScreen];
 }
 
 #pragma mark --

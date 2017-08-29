@@ -33,7 +33,7 @@
                     <state key="normal" image="switchTofullScreen"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI0-Kd-psR">
-                    <rect key="frame" x="295" y="328" width="30" height="12"/>
+                    <rect key="frame" x="296" y="328" width="29" height="12"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -45,35 +45,41 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Fhd-1q-QIc">
-                    <rect key="frame" x="94" y="319" width="195" height="31"/>
+                    <rect key="frame" x="94" y="319" width="196" height="31"/>
                 </slider>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFf-8D-ST2">
+                    <rect key="frame" x="156" y="470" width="16" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="next"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="B8J-MR-n7m" firstAttribute="leading" secondItem="Fhd-1q-QIc" secondAttribute="trailing" constant="45" id="32C-hl-V9Q"/>
                 <constraint firstItem="B8J-MR-n7m" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="8oC-bg-7vS"/>
                 <constraint firstItem="w2A-D6-zox" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="8zx-O5-pHl"/>
                 <constraint firstItem="w2A-D6-zox" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="9Sv-cK-rvd"/>
                 <constraint firstItem="x7h-Fz-8kQ" firstAttribute="centerY" secondItem="w2A-D6-zox" secondAttribute="centerY" id="Cmd-Ko-Ymd"/>
                 <constraint firstItem="gI0-Kd-psR" firstAttribute="centerY" secondItem="B8J-MR-n7m" secondAttribute="centerY" id="IN4-EU-JNK"/>
+                <constraint firstItem="Fhd-1q-QIc" firstAttribute="leading" secondItem="x7h-Fz-8kQ" secondAttribute="trailing" constant="8" id="NPl-yl-DXe"/>
                 <constraint firstItem="gI0-Kd-psR" firstAttribute="leading" secondItem="Fhd-1q-QIc" secondAttribute="trailing" constant="8" symbolic="YES" id="R4q-6C-nKq"/>
                 <constraint firstItem="x7h-Fz-8kQ" firstAttribute="leading" secondItem="w2A-D6-zox" secondAttribute="trailing" constant="6" id="ayT-wL-KYt"/>
-                <constraint firstItem="Fhd-1q-QIc" firstAttribute="leading" secondItem="w2A-D6-zox" secondAttribute="trailing" constant="43" id="hJR-UT-S7j"/>
                 <constraint firstItem="B8J-MR-n7m" firstAttribute="leading" secondItem="gI0-Kd-psR" secondAttribute="trailing" constant="7" id="lwT-NN-PtZ"/>
                 <constraint firstItem="Fhd-1q-QIc" firstAttribute="centerY" secondItem="w2A-D6-zox" secondAttribute="centerY" id="rVt-VH-fr2"/>
                 <constraint firstAttribute="trailing" secondItem="B8J-MR-n7m" secondAttribute="trailing" constant="3" id="zYd-gd-S6L"/>
             </constraints>
             <connections>
                 <outlet property="fullScreenButton" destination="B8J-MR-n7m" id="Pm2-iB-VBz"/>
+                <outlet property="nextButton" destination="cFf-8D-ST2" id="c45-3c-PHO"/>
                 <outlet property="pauseButton" destination="w2A-D6-zox" id="zDS-aN-lgT"/>
                 <outlet property="playSlider" destination="Fhd-1q-QIc" id="O6z-mS-b3y"/>
                 <outlet property="playedTimeLab" destination="x7h-Fz-8kQ" id="piL-hT-f3C"/>
                 <outlet property="totalPlayTimeLab" destination="gI0-Kd-psR" id="BO3-Iv-D6v"/>
             </connections>
-            <point key="canvasLocation" x="-115" y="50"/>
+            <point key="canvasLocation" x="-115.5" y="49.5"/>
         </view>
     </objects>
     <resources>
+        <image name="next" width="16" height="16"/>
         <image name="pause" width="16" height="16"/>
         <image name="play" width="16" height="16"/>
         <image name="switchTofullScreen" width="16" height="16"/>
