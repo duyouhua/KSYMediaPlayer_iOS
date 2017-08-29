@@ -62,11 +62,15 @@
         [_playControlView.fullScreenButton addTarget:self action:@selector(fullScreenAction) forControlEvents:UIControlEventTouchUpInside];
         [_playControlView.pauseButton addTarget:self action:@selector(playStateHandler) forControlEvents:UIControlEventTouchUpInside];
         [_playControlView.playSlider addTarget:self action:@selector(sliderValueChangedHandler) forControlEvents:UIControlEventValueChanged];
-        for (UIView *aView in _playControlView.subviews) {
-            [aView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        }
+        [_playControlView.nextButton addTarget:self action:@selector(nextButtonHandler) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playControlView;
+}
+
+- (void)nextButtonHandler {
+    if (self.nextButtonBLock) {
+        self.nextButtonBLock();
+    }
 }
 
 - (void)sliderValueChangedHandler {

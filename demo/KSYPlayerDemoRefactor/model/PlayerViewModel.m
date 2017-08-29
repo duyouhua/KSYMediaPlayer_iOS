@@ -17,10 +17,12 @@
 @implementation PlayerViewModel
 
 - (instancetype)initWithPlayingVideoModel:(VideoModel *)playingVideoModel
-                       videoListViewModel:(VideoListViewModel *)videoListViewModel {
+                       videoListViewModel:(VideoListViewModel *)videoListViewModel
+                            selectedIndex:(NSInteger)selectedIndex {
     if (self = [super init]) {
         _playingVideoModel = playingVideoModel;
         _videoListViewModel = videoListViewModel;
+        _currPlayingIndex = selectedIndex;
     }
     return self;
 }
@@ -45,6 +47,14 @@
     }
     [[UIDevice currentDevice] setValue:@(orientation) forKey:@"orientation"];
     aView.fullScreen = (orientation != UIInterfaceOrientationPortrait);
+}
+
+- (VideoModel *)nextVideoModel {
+    VideoModel *next = nil;
+    if (_currPlayingIndex + 1 < _videoListViewModel.listViewDataSource.count) {
+        next = _videoListViewModel.listViewDataSource[_currPlayingIndex + 1];
+    }
+    return next;
 }
 
 @end

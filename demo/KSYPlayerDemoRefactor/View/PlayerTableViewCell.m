@@ -18,17 +18,6 @@
 
 @implementation PlayerTableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 - (void)configeWithVideoModel:(VideoModel *)videoModel {
     [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:videoModel.CoverURL.firstObject] placeholderImage:[UIImage imageNamed:@""]];
     self.videoTitleLab.text = videoModel.VideoTitle;

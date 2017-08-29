@@ -20,10 +20,15 @@
 
 @property (nonatomic, weak) UIViewController *owner;
 
+@property (nonatomic, assign) NSInteger currPlayingIndex;
+
 - (instancetype)initWithPlayingVideoModel:(VideoModel *)playingVideoModel
-                       videoListViewModel:(VideoListViewModel *)videoListViewModel;
+                       videoListViewModel:(VideoListViewModel *)videoListViewModel
+                            selectedIndex:(NSInteger)selectedIndex;
 
 - (void)fullScreenHandlerForView:(VideoContainerView *)aView
                    isFullScreen:(BOOL) isFullScreen;
+
+- (VideoModel *)nextVideoModel;
 
 @end

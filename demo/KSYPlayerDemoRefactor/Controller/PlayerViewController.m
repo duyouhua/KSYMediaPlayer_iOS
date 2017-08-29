@@ -133,6 +133,14 @@
         double seekPos = progress * strongSelf.player.duration;
         [strongSelf.player seekTo:seekPos accurate:YES];
     };
+    self.videoContainerView.nextButtonBLock = ^{
+        typeof(weakSelf) strongSelf = weakSelf;
+        VideoModel *nextVideo = [strongSelf.playerViewModel nextVideoModel];
+        if (nextVideo) {
+            [strongSelf.player reload:[NSURL URLWithString:nextVideo.PlayURL.lastObject]];
+            strongSelf.playerViewModel.playingVideoModel = nextVideo;
+        }
+    };
     [_player.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.videoContainerView);
     }];
@@ -198,9 +206,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.playerViewModel.currPlayingIndex == indexPath.row) {
+        return;
+    }
     if (indexPath.row < _playerViewModel.videoListViewModel.listViewDataSource.count) {
         VideoModel *videoModel = _playerViewModel.videoListViewModel.listViewDataSource[indexPath.row];
-        // 切换视频资源
+//        [self.player setUrl:[NSURL URLWithString:videoModel.PlayURL.firstObject]];
+        [self.player reload:[NSURL URLWithString:videoModel.PlayURL.firstObject]];
+        self.playerViewModel.playingVideoModel = videoModel;
+        self.playerViewModel.currPlayingIndex = indexPath.row;
     }
 }
 

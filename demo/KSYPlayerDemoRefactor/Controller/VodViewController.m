@@ -90,17 +90,17 @@
         __weak typeof(self) weakSelf = self;
         _headerView.tapBlock = ^{
             typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf didSelectedVideoHandler:strongSelf.videoListViewModel.listViewDataSource.firstObject];
+            [strongSelf didSelectedVideoHandler:strongSelf.videoListViewModel.listViewDataSource.firstObject selectedIndex:0];
         };
     }
     return _headerView;
 }
 
-- (void)didSelectedVideoHandler:(VideoModel *)videoModel {
+- (void)didSelectedVideoHandler:(VideoModel *)videoModel selectedIndex:(NSInteger)selectedIndex {
     if (!videoModel) {
         return;
     }
-    PlayerViewModel *playerViewModel = [[PlayerViewModel alloc] initWithPlayingVideoModel:videoModel videoListViewModel:_videoListViewModel];
+    PlayerViewModel *playerViewModel = [[PlayerViewModel alloc] initWithPlayingVideoModel:videoModel videoListViewModel:_videoListViewModel selectedIndex:selectedIndex];
     PlayerViewController *pvc = [[PlayerViewController alloc] initWithPlayerViewModel:playerViewModel];
     [self.navigationController pushViewController:pvc animated:YES];
 }
@@ -126,7 +126,7 @@
         videoModel = self.videoListViewModel.listViewDataSource[indexPath.row];
     }
     if (videoModel) {
-        [self didSelectedVideoHandler:videoModel];
+        [self didSelectedVideoHandler:videoModel selectedIndex:indexPath.row];
     }
 }
 
